@@ -40,7 +40,7 @@ public class MeetingController {
     }
 
     @GetMapping("/meetings/attendees/{meetingID}")
-    public List<MeetingAttendees> getAttendeesByMeetingID(@PathVariable("meetingID") int meetingID) {
+    public List<People> getAttendeesByMeetingID(@PathVariable("meetingID") int meetingID) {
         return meetingService.getAttendeesByMeetingID(meetingID);
     }
 }

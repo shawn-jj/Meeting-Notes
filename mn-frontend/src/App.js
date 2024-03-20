@@ -1,53 +1,61 @@
+import {
+    Box,
+    SkeletonCircle,
+    SkeletonText,
+} from '@chakra-ui/react'
+
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import MeetingCard from './components/MeetingCard';
+import SidebarWithHeader from './components/SidebarWithHeader'
+import { loadMeetings } from "./services/Client.js"
+
 
 export default function App() {
 
+    // Variables for getting meetings
     const [meetings, setMeetings] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        loadMeetings();
+        setLoading(true);
+
+        // Fake loading process
+        setTimeout(() => {
+
+            loadMeetings().then(res => {
+                setMeetings(res.data)
+            }).finally(() => {
+                setLoading(false)
+            });
+
+        }, 500);
+
     }, []);
 
-    const loadMeetings = async() => {
-        const meetingsResult = await axios.get("http://localhost:8080/api/meetings");
-        setMeetings(meetingsResult.data);
+    // Loading UI
+    if (loading) {
+        return (
+            <div>
+                <SidebarWithHeader>
+                    <Box padding='6' boxShadow='lg' bg='white'>
+                        <SkeletonCircle size='10' />
+                        <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
+                    </Box>
+                </SidebarWithHeader>
+            </div>
+        )
     }
 
+    // Display meeting data as cards
     return (
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>meetingID</th>
-                        <th>createPeopleID</th>
-                        <th>meetingName</th>
-                        <th>meetingNote</th>
-                        <th>location</th>
-                        <th>duration</th>
-                        <th>meetingDate</th>
-                        <th>createDate</th>
-                        <th>Attendees</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        meetings.map((meeting) => (
-                            <tr>
-                                <td>{meeting.meetingID}</td>
-                                <td>{meeting.createPeopleID}</td>
-                                <td>{meeting.meetingName}</td>
-                                <td>{meeting.meetingNote}</td>
-                                <td>{meeting.location}</td>
-                                <td>{meeting.duration}</td>
-                                <td>{meeting.meetingDate}</td>
-                                <td>{meeting.createDate}</td>
-                                <td>TBD</td>
-                            </tr>
+            <SidebarWithHeader>
+                {
+                    meetings.map((meeting, index) => (
+                            <MeetingCard key={index} {...meeting} />
                         ))
-                    }
-                </tbody>
-            </table>
+                }
+            </SidebarWithHeader>
         </div>
     )
 }

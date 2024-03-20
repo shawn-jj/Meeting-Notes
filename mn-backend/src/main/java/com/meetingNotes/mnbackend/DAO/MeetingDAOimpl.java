@@ -8,6 +8,7 @@ import com.meetingNotes.mnbackend.entity.MeetingAttendees;
 import com.meetingNotes.mnbackend.entity.People;
 import com.meetingNotes.mnbackend.utils.MeetingAttendeesRowMapper;
 import com.meetingNotes.mnbackend.utils.MeetingRowMapper;
+import com.meetingNotes.mnbackend.utils.PeopleRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,11 +18,13 @@ public class MeetingDAOimpl implements MeetingDAO {
     private final JdbcTemplate jdbcTemplate;
     private final MeetingRowMapper meetingRowMapper;
     private final MeetingAttendeesRowMapper meetingAttendeesRowMapper;
+    private final PeopleRowMapper peopleRowMapper;
 
-    public MeetingDAOimpl(JdbcTemplate jdbcTemplate, MeetingRowMapper meetingRowMapper, MeetingAttendeesRowMapper meetingAttendeesRowMapper) {
+    public MeetingDAOimpl(JdbcTemplate jdbcTemplate, MeetingRowMapper meetingRowMapper, MeetingAttendeesRowMapper meetingAttendeesRowMapper, PeopleRowMapper peopleRowMapper) {
         this.jdbcTemplate = jdbcTemplate;
         this.meetingRowMapper = meetingRowMapper;
         this.meetingAttendeesRowMapper = meetingAttendeesRowMapper;
+        this.peopleRowMapper = peopleRowMapper;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class MeetingDAOimpl implements MeetingDAO {
                 SELECT * FROM people WHERE peopleID = ?
                 """;
 
-        Optional<People> people = jdbcTemplate.query(sql, meetingRowMapper, peopleID).stream().findFirst();
+        Optional<People> people = jdbcTemplate.query(sql, peopleRowMapper, peopleID).stream().findFirst();
 
         return people;
     }
