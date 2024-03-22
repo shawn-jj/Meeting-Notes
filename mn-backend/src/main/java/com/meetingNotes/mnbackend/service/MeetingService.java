@@ -18,40 +18,6 @@ public class MeetingService {
         this.meetingDAO = meetingDAO;
     }
 
-    /**
-     * Get meeting data that displayed as cards at front page
-     *
-     * @return a list of meetings contains: meetingID, meetingName, meetingNote, meetingDate, attendeesNameList
-     */
-    public List<Meeting> getMeetingDisplay() {
-        List<Meeting> allMeetings = meetingDAO.selectAllMeetings();
-        List<Meeting> meetingDisplayList = new ArrayList<>();
-
-        for(Meeting meeting : allMeetings) {
-
-            // Get attendees name list
-            int meetingID = meeting.getMeetingID();
-            List<MeetingAttendees> attendees = meetingDAO.selectAttendeesByMeetingID(meetingID);
-            List<String> attendeNameList = new ArrayList<>();
-
-            for(MeetingAttendees attendeeData : attendees) {
-
-                int attendeeID = attendeeData.getPeopleID();
-                People attendee = meetingDAO.selectPeopleByID(attendeeID)
-                                                .orElseThrow( () -> new RuntimeException("People not found"));
-                String attendeeName = attendee.getName();
-                attendeNameList.add(attendeeName);
-            }
-
-//            // Construct MeetingDisplay
-//            Meeting meetingDisplayData = new Meeting(meeting.getMeetingID(), meeting.getMeetingName(),
-//                    meeting.getMeetingNote(), meeting.getMeetingDate(), attendeNameList);
-//
-//            meetingDisplayList.add(meetingDisplayData);
-        }
-        return meetingDisplayList;
-    }
-
     public List<Meeting> getAllMeetings() {
         return meetingDAO.selectAllMeetings();
     }

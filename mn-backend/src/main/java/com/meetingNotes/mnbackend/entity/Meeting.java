@@ -2,7 +2,6 @@ package com.meetingNotes.mnbackend.entity;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.List;
 
 public class Meeting {
     private Integer meetingID;
@@ -13,10 +12,6 @@ public class Meeting {
     private Time duration;
     private Date meetingDate;
     private Date createDate;
-
-//    // for MeetingDisplay
-//    private List<String> attendeeNameList;
-
 
     public Meeting(Integer meetingID, Integer createPeopleID, String meetingName, String meetingNote,
                    String location, Time duration, Date meetingDate, Date createDate) {
@@ -29,15 +24,6 @@ public class Meeting {
         this.meetingDate = meetingDate;
         this.createDate = createDate;
     }
-
-//    // for MeetingDisplay
-//    public Meeting(Integer meetingID, String meetingName, String meetingNote, Date meetingDate, List<String> attendeeNameList) {
-//        this.meetingID = meetingID;
-//        this.meetingName = meetingName;
-//        this.meetingNote = meetingNote;
-//        this.meetingDate = meetingDate;
-//        this.attendeeNameList = attendeeNameList;
-//    }
 
     public Integer getMeetingID() {
         return meetingID;
