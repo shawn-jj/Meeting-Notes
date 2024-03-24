@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 
 import reportWebVitals from './reportWebVitals';
-import Dashboard from './pages/Dashboard';
 import Meetings from './pages/Meetings';
+import App from './App'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
+    element: <App />
   },
   {
     path: "/meetings",

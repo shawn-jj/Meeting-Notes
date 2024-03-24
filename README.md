@@ -2,21 +2,20 @@
 A tool to take and manage your meeting notes
 
 # Preview
-![preview](/assets/preview-v030-1.jpg "Dashboard")
-![preview](/assets/preview-v030-2.jpg "Meetings")
+![preview](/assets/preview-v040-1.jpg "Meetings")
+![preview](/assets/preview-v040-2.jpg "Meetings-dark")
+![preview](/assets/preview-v040-3.jpg "Meetings-mobile")
 
 # Next step
 
 - Implement the feature to view meeting details
 - Implement the feature to add new meeting notes
-- Implement statistics display in dashboard
-- Implement people page
-- Implement calendar page
-- Implement flagged meetings page
-
+- Implement more pages
 
 # Work done
 
+- Refined design of frontend using another UI library (Joy UI)
+- Separate AvatarGroup component from MeetingCard
 - Refactored the frontend using another UI library (Material UI)
 - Created page urls and linked pages (React Router)
 - Created dashboard page
