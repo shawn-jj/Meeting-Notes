@@ -8,15 +8,26 @@ import {
 import reportWebVitals from './reportWebVitals';
 import Meetings from './pages/Meetings';
 import App from './App'
+import People from './pages/People';
+import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <Dashboard />
   },
   {
     path: "/meetings",
     element: <Meetings />,
+  },
+  {
+    path: "/people",
+    element: <People />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />
   },
 ]);
 

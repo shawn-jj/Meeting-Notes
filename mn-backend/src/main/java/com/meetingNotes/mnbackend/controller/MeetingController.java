@@ -1,11 +1,8 @@
 package com.meetingNotes.mnbackend.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.meetingNotes.mnbackend.entity.Meeting;
-import com.meetingNotes.mnbackend.entity.MeetingAttendees;
 import com.meetingNotes.mnbackend.entity.People;
 import com.meetingNotes.mnbackend.service.MeetingService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("api/meetings")
 @CrossOrigin("http://localhost:3000/")
 public class MeetingController {
     private final MeetingService meetingService;
@@ -24,12 +21,12 @@ public class MeetingController {
         this.meetingService = meetingService;
     }
 
-    @GetMapping("/meetings")
+    @GetMapping
     public List<Meeting> getAllMeetings() {
         return meetingService.getAllMeetings();
     }
 
-    @GetMapping("/meetings/{meetingID}")
+    @GetMapping("/{meetingID}")
     public Meeting getMeetingByID(@PathVariable("meetingID") int meetingID) {
         return meetingService.getMeetingByID(meetingID);
     }
@@ -39,7 +36,7 @@ public class MeetingController {
         return meetingService.getPeopleByID(peopleID);
     }
 
-    @GetMapping("/meetings/attendees/{meetingID}")
+    @GetMapping("/attendees/{meetingID}")
     public List<People> getAttendeesByMeetingID(@PathVariable("meetingID") int meetingID) {
         return meetingService.getAttendeesByMeetingID(meetingID);
     }

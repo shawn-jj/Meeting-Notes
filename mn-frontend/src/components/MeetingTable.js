@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from 'react'
 
+import Autocomplete from '@mui/joy/Autocomplete';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import Divider from '@mui/joy/Divider';
@@ -20,7 +21,6 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 
 
-import InputBoxPeople from './InputBoxPeople';
 import MeetingTableItem from './MeetingTableItem';
 import { loadMeetings } from "../utils/Client.js"
 
@@ -37,14 +37,35 @@ export default function MeetingTable() {
 
   }, []);
 
+  // Temp
+  const peopleList = [
+    { name: 'people1', email: 123 },
+    { name: 'people2', email: 123 },
+    { name: 'people3', email: 123 },
+  ];
+
   const [open, setOpen] = React.useState(false);
+
   const renderFilters = () => (
     <React.Fragment>
-      <InputBoxPeople />
+      <FormControl size="sm">
+        <FormLabel>Filter by attendees</FormLabel>
+        <Autocomplete
+          multiple
+          placeholder="Attendees"
+          limitTags={2}
+          options={peopleList}
+          getOptionLabel={(option) => option.name}
+        />
+      </FormControl>
     </React.Fragment>
   );
+
   return (
     <React.Fragment>
+
+      {/* Search Bar */}
+      {/* For mobile display */}
       <Sheet
         className="SearchAndFilters-mobile"
         sx={{
@@ -79,10 +100,15 @@ export default function MeetingTable() {
               <Button color="primary" onClick={() => setOpen(false)}>
                 Submit
               </Button>
+              <Button color="neutral" variant="outlined" onClick={() => setOpen(false)}>
+                Back
+              </Button>
             </Sheet>
           </ModalDialog>
         </Modal>
       </Sheet>
+
+      {/* For PC display */}
       <Box
         className="SearchAndFilters-tabletUp"
         sx={{
@@ -102,6 +128,7 @@ export default function MeetingTable() {
         </FormControl>
         {renderFilters()}
       </Box>
+
       <Sheet
         className="OrderTableContainer"
         variant="outlined"

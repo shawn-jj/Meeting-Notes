@@ -12,18 +12,18 @@ import ListItemContent from '@mui/joy/ListItemContent';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import ListAltRoundedIcon from '@mui/icons-material/ListAltRounded';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import ColorSchemeToggle from '../utils/ColorSchemeToggle';
 import { closeSidebar } from '../utils/SidebarConfig';
 
-export default function Sidebar() {
+export default function Sidebar({ currentPage }) {
   return (
     <Sheet
       className="Sidebar"
@@ -101,17 +101,13 @@ export default function Sidebar() {
             '--ListItem-radius': (theme) => theme.vars.radius.sm,
           }}
         >
-          <ListItem>
-            <ListItemButton>
-              <HomeRoundedIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Home</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton
+              selected={currentPage == "Dashboard"}
+              component="a"
+              href="/"
+            >
               <DashboardRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Dashboard</Typography>
@@ -120,7 +116,11 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton selected>
+            <ListItemButton
+              selected={currentPage == "Meetings"}
+              component="a"
+              href="/meetings"
+            >
               <ListAltRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Meetings</Typography>
@@ -129,7 +129,11 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton
+              selected={currentPage == "My profile"}
+              component="a"
+              href="/profile"
+            >
               <PersonRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">My profile</Typography>
@@ -138,7 +142,11 @@ export default function Sidebar() {
           </ListItem>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton
+              selected={currentPage == "People"}
+              component="a"
+              href="/people"
+            >
               <GroupRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">People</Typography>
@@ -164,7 +172,18 @@ export default function Sidebar() {
               Settings
             </ListItemButton>
           </ListItem>
+
+          <ListItem>
+            <ListItemButton
+              component="a"
+              href="https://github.com/shawn-jj/Meeting-Notes"
+            >
+              <GitHubIcon />
+              Star
+            </ListItemButton>
+          </ListItem>
         </List>
+
 
       </Box>
       <Divider />

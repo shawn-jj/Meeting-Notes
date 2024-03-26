@@ -21,7 +21,7 @@ export default function Meetings() {
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
 
         <Header /> {/* The Header is for Mobile  */}
-        <Sidebar />
+        <Sidebar currentPage="Meetings"/>
 
         {/* Page header */}
         <Box
@@ -74,5 +74,5 @@ export default function Meetings() {
         </Box>
       </Box>
     </CssVarsProvider>
-  );
+  )
 }

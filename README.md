@@ -8,12 +8,13 @@ A tool to take and manage your meeting notes
 
 # Next step
 
-- Implement the feature to view meeting details
-- Implement the feature to add new meeting notes
-- Implement more pages
+- Refactor meeting page
+- Implement functions of pages
 
 # Work done
 
+- Created people page, as well as its mobile display
+- Created my profile page, as well as its mobile display
 - Refined design of frontend using another UI library (Joy UI)
 - Separate AvatarGroup component from MeetingCard
 - Refactored the frontend using another UI library (Material UI)
