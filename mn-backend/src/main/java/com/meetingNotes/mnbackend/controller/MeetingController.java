@@ -3,7 +3,6 @@ package com.meetingNotes.mnbackend.controller;
 import java.util.List;
 
 import com.meetingNotes.mnbackend.entity.Meeting;
-import com.meetingNotes.mnbackend.entity.People;
 import com.meetingNotes.mnbackend.service.MeetingService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,15 +28,5 @@ public class MeetingController {
     @GetMapping("/{meetingID}")
     public Meeting getMeetingByID(@PathVariable("meetingID") int meetingID) {
         return meetingService.getMeetingByID(meetingID);
-    }
-
-    @GetMapping("/people/{peopleID}")
-    public People getPeopleByID(@PathVariable("peopleID") int peopleID) {
-        return meetingService.getPeopleByID(peopleID);
-    }
-
-    @GetMapping("/attendees/{meetingID}")
-    public List<People> getAttendeesByMeetingID(@PathVariable("meetingID") int meetingID) {
-        return meetingService.getAttendeesByMeetingID(meetingID);
     }
 }

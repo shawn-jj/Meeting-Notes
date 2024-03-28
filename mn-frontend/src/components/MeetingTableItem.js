@@ -5,7 +5,7 @@ import MeetingTableRowMenu from './MeetingTableRowMenu';
 import AvatarGroupWithSize from './AvatarGroupWithSize';
 import { loadAttendeesByMeetingID } from "../utils/Client.js"
 
-export default function MeetingTableItem({ meetingID, meetingName, meetingNote, meetingDate }) {
+export default function MeetingTableItem({ meetingID, meetingTopic, meetingNote, meetingDate }) {
 
     // Variables for getting attendees
     const [attendees, setAttendees] = useState([]);
@@ -21,7 +21,7 @@ export default function MeetingTableItem({ meetingID, meetingName, meetingNote, 
     return (
         <tr>
             <td>
-                <Typography level="body-xs">{meetingName}</Typography>
+                <Typography level="body-xs">{meetingTopic}</Typography>
             </td>
             <td>
                 <Typography level="body-xs">{meetingDate}</Typography>

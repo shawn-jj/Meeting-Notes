@@ -16,7 +16,9 @@ public class PeopleRowMapper implements RowMapper {
         People people = new People(
                 rs.getInt("peopleID"),
                 rs.getString("name"),
-                rs.getString("email")
+                rs.getString("email"),
+                rs.getString("role"),
+                rs.getString("password")
         );
 
         return people;

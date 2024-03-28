@@ -22,12 +22,15 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 import MeetingTableItem from './MeetingTableItem';
-import { loadMeetings } from "../utils/Client.js"
+import { loadMeetings, loadPeople } from "../utils/Client.js"
 
 export default function MeetingTable() {
 
   // Variables for getting meetings
   const [meetings, setMeetings] = useState([]);
+  // Variables for getting people
+  const [people, setPeople] = useState([]);
+
 
   useEffect(() => {
 
@@ -35,14 +38,11 @@ export default function MeetingTable() {
       setMeetings(res.data)
     })
 
-  }, []);
+    loadPeople().then(res => {
+      setPeople(res.data)
+    })
 
-  // Temp
-  const peopleList = [
-    { name: 'people1', email: 123 },
-    { name: 'people2', email: 123 },
-    { name: 'people3', email: 123 },
-  ];
+  }, []);
 
   const [open, setOpen] = React.useState(false);
 
@@ -53,8 +53,8 @@ export default function MeetingTable() {
         <Autocomplete
           multiple
           placeholder="Attendees"
-          limitTags={2}
-          options={peopleList}
+          limitTags={3}
+          options={people}
           getOptionLabel={(option) => option.name}
         />
       </FormControl>
@@ -155,7 +155,7 @@ export default function MeetingTable() {
         >
           <thead>
             <tr>
-              <th style={{ width: 150, padding: '12px 6px' }}>Meeting Name</th>
+              <th style={{ width: 150, padding: '12px 6px' }}>Meeting Topic</th>
               <th style={{ width: 150, padding: '12px 6px' }}>Date</th>
               <th style={{ padding: '12px 6px' }}>Meeting Notes</th>
               <th style={{ width: 150, padding: '12px 6px' }}>Attendees</th>

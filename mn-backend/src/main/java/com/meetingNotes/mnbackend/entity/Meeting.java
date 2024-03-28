@@ -6,23 +6,41 @@ import java.sql.Time;
 public class Meeting {
     private Integer meetingID;
     private Integer createPeopleID;
-    private String meetingName;
+    private String meetingTopic;
     private String meetingNote;
     private String location;
-    private Time duration;
     private Date meetingDate;
     private Date createDate;
+    private Time startTime;
+    private Time endTime;
 
     public Meeting(Integer meetingID, Integer createPeopleID, String meetingName, String meetingNote,
-                   String location, Time duration, Date meetingDate, Date createDate) {
+                   String location, Date meetingDate, Date createDate, Time startTime, Time endTime) {
         this.meetingID = meetingID;
         this.createPeopleID = createPeopleID;
-        this.meetingName = meetingName;
+        this.meetingTopic = meetingName;
         this.meetingNote = meetingNote;
         this.location = location;
-        this.duration = duration;
         this.meetingDate = meetingDate;
         this.createDate = createDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public Time getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Time startTime) {
+        this.startTime = startTime;
+    }
+
+    public Time getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Time endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getMeetingID() {
@@ -41,12 +59,12 @@ public class Meeting {
         this.createPeopleID = createPeopleID;
     }
 
-    public String getMeetingName() {
-        return meetingName;
+    public String getMeetingTopic() {
+        return meetingTopic;
     }
 
-    public void setMeetingName(String meetingName) {
-        this.meetingName = meetingName;
+    public void setMeetingTopic(String meetingTopic) {
+        this.meetingTopic = meetingTopic;
     }
 
     public String getMeetingNote() {
@@ -63,14 +81,6 @@ public class Meeting {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public Time getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Time duration) {
-        this.duration = duration;
     }
 
     public Date getMeetingDate() {

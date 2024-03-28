@@ -2,17 +2,25 @@
 A tool to take and manage your meeting notes
 
 # Preview
-![preview](/assets/preview-v040-1.jpg "Meetings")
+![preview](/assets/preview-v060-2.jpg "People")
+![preview](/assets/preview-v060-1.jpg "Meetings")
 ![preview](/assets/preview-v040-2.jpg "Meetings-dark")
 ![preview](/assets/preview-v040-3.jpg "Meetings-mobile")
 
 # Next step
 
-- Refactor meeting page
-- Implement functions of pages
+- Refactor people page
+- Implement filter on people page
+- Implement login and register function
 
 # Work done
 
+- Displayed people in people filter 
+- Displayed people data as cards
+- Split the APIs of People and Meetings, restructured corresponding Controller, Service and DAO
+- Added Start time and end time entries to the meetings database, updated corresponding RowMapper
+- Added role and password entries to the people database, updated corresponding RowMapper
+- Re-add the SidebarWithHeader component to increase code reusability
 - Created people page, as well as its mobile display
 - Created my profile page, as well as its mobile display
 - Refined design of frontend using another UI library (Joy UI)

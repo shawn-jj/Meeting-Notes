@@ -8,7 +8,7 @@ import CardActions from '@mui/joy/CardActions';
 import Typography from '@mui/joy/Typography';
 import Stack from '@mui/joy/Stack';
 
-export default function PeopleCard() {
+export default function PeopleCard({name, email, role}) {
     const [flex, setFlex] = React.useState(true);
     return (
         <Box>
@@ -27,17 +27,20 @@ export default function PeopleCard() {
                 >
                     {/* How large is the image */}
                     <AspectRatio ratio="3/4" flex={flex} sx={{ flexBasis: 100 }}>
-                        <img
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286"
-                        />
+                        {/* <img
+                            src=""
+                        /> */}
+                        <Typography level="title-lg" component="div">
+                            {name.includes(' ') ? name.split(' ')[0][0] + name.split(' ')[1][0] : name.split(' ')[0][0]}
+                        </Typography>
                     </AspectRatio>
                     <CardContent>
                         <br />
                         <Typography level="title-lg" component="div">
-                            Name
+                            {name}
                         </Typography>
                         <Typography level="body-lg">
-                            Role
+                            {role}
                         </Typography>
                         <CardActions buttonFlex="none">
                             <Button variant="solid" color="primary" size="sm">
@@ -47,7 +50,7 @@ export default function PeopleCard() {
                     </CardContent>
                     <CardContent>
                         <Typography level="h1">
-                            7
+                            Num
                         </Typography>
                         <Typography>
                             Meetings with you

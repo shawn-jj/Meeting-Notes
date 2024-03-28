@@ -16,12 +16,13 @@ public class MeetingRowMapper implements RowMapper {
         Meeting meeting = new Meeting(
                 rs.getInt("meetingID"),
                 rs.getInt("createPeopleID"),
-                rs.getString("meetingName"),
+                rs.getString("meetingTopic"),
                 rs.getString("meetingNote"),
                 rs.getString("location"),
-                rs.getTime("duration"),
                 rs.getDate("meetingDate"),
-                rs.getDate("createDate")
+                rs.getDate("createDate"),
+                rs.getTime("startTime"),
+                rs.getTime("endTime")
         );
 
         return meeting;

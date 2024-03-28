@@ -4,11 +4,31 @@ public class People {
     private Integer peopleID;
     private String name;
     private String email;
+    private String role;
+    private String password;
 
-    public People(Integer peopleID, String name, String email) {
+    public People(Integer peopleID, String name, String email, String role, String password) {
         this.peopleID = peopleID;
         this.name = name;
         this.email = email;
+        this.role = role;
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getPeopleID() {
