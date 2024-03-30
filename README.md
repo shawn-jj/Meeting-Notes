@@ -2,19 +2,20 @@
 A tool to take and manage your meeting notes
 
 # Preview
+![preview](/assets/preview-v070-1.jpg "Meetings-no-select")
+![preview](/assets/preview-v070-2.jpg "Meetings")
 ![preview](/assets/preview-v060-2.jpg "People")
-![preview](/assets/preview-v060-1.jpg "Meetings")
-![preview](/assets/preview-v040-2.jpg "Meetings-dark")
-![preview](/assets/preview-v040-3.jpg "Meetings-mobile")
 
 # Next step
 
+- Implement add / edit / delete meetings function
 - Refactor people page
 - Implement filter on people page
 - Implement login and register function
 
 # Work done
 
+- Refactored meetings page
 - Displayed people in people filter 
 - Displayed people data as cards
 - Split the APIs of People and Meetings, restructured corresponding Controller, Service and DAO

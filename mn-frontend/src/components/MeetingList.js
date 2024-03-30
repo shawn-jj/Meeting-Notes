@@ -1,41 +1,72 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react'
-import Box from '@mui/joy/Box';
+import * as React from 'react';
+import Stack from '@mui/joy/Stack';
+import Sheet from '@mui/joy/Sheet';
+import Typography from '@mui/joy/Typography';
+import { Box, Input } from '@mui/joy';
 import List from '@mui/joy/List';
+import Button from '@mui/joy/Button';
 
-import ListDivider from '@mui/joy/ListDivider';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+
 import MeetingListItem from './MeetingListItem';
-import { loadMeetings } from "../utils/Client.js"
 
 
-export default function MeetingList() {
+export default function MeetingList({meetings, selectedMeetingID, setSelectedMeeting}) {
 
-  // Variables for getting meetings
-  const [meetings, setMeetings] = useState([]);
+    return (
+        <Sheet
+            sx={{
+                borderRight: '1px solid',
+                borderColor: 'divider',
+                height: 'calc(100dvh - var(--Header-height))',
+                overflowY: 'auto',
+            }}
+        >
+            <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                justifyContent="space-between"
+                p={2}
+                pb={1.5}
+            >
+                <Typography level="h2" component="h1">
+                    Meetings
+                </Typography>
+                <Button
+                    color="primary"
+                    startDecorator={<AddRoundedIcon />}
+                    size="sm"
+                >
+                    New meeting
+                </Button>
 
-  useEffect(() => {
-
-    loadMeetings().then(res => {
-      setMeetings(res.data)
-    })
-
-  }, []);
-
-  return (
-    <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
-      <List
-        size="sm"
-        sx={{
-          '--ListItem-paddingX': 0,
-        }}
-      >
-        {
-          meetings.map((meeting, index) => (
-            <MeetingListItem key={index} {...meeting} />
-          ))
-        }
-        <ListDivider />
-      </List>
-    </Box>
-  );
+            </Stack>
+            <Box sx={{ px: 2, pb: 1.5 }}>
+                <Input
+                    size="sm"
+                    startDecorator={<SearchRoundedIcon />}
+                    placeholder="Search"
+                    aria-label="Search"
+                />
+            </Box>
+            <List
+                sx={{
+                    py: 0,
+                    '--ListItem-paddingY': '0.75rem',
+                    '--ListItem-paddingX': '1rem',
+                }}
+            >
+                {meetings.map((meeting, Index) => (
+                    <MeetingListItem
+                        key={Index}
+                        selectedMeetingID={selectedMeetingID}
+                        setSelectedMeeting={setSelectedMeeting}
+                        meeting={meeting}
+                    />
+                ))}
+            </List>
+        </Sheet>
+    );
 }

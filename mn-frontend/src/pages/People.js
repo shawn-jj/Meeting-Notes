@@ -82,11 +82,13 @@ export default function People() {
       PageAdditionalComponent={peopleSearchBar()}
     >
 
-      {
-        people.map((person, index) => (
-          <PeopleCard key={index} {...person} />
-        ))
-      }
+      <Sheet sx={{overflowY: 'auto'}} >
+        {
+          people.map((person, index) => (
+            <PeopleCard key={index} {...person} />
+          ))
+        }
+      </Sheet>
 
     </SidebarWithHeader>
   )

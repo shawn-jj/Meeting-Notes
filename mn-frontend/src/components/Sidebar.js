@@ -21,7 +21,7 @@ import ListAltRoundedIcon from '@mui/icons-material/ListAltRounded';
 import GitHubIcon from '@mui/icons-material/GitHub';
 
 import ColorSchemeToggle from '../utils/ColorSchemeToggle';
-import { closeSidebar } from '../utils/SidebarConfig';
+import { closeSidebar } from '../utils/DrawerConfig';
 
 export default function Sidebar({ currentPage }) {
   return (
