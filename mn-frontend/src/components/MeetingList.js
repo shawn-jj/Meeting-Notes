@@ -4,15 +4,14 @@ import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
 import { Box, Input } from '@mui/joy';
 import List from '@mui/joy/List';
-import Button from '@mui/joy/Button';
 
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 import MeetingListItem from './MeetingListItem';
+import MeetingFormButton from './MeetingFormButton';
 
-
-export default function MeetingList({meetings, selectedMeetingID, setSelectedMeeting}) {
+export default function MeetingList({ meetings, people, selectedMeetingID, setSelectedMeeting, setSelectedMeetingAttendees }) {
 
     return (
         <Sheet
@@ -34,13 +33,16 @@ export default function MeetingList({meetings, selectedMeetingID, setSelectedMee
                 <Typography level="h2" component="h1">
                     Meetings
                 </Typography>
-                <Button
+
+                {/* Add a new meeting button*/}
+                <MeetingFormButton
                     color="primary"
                     startDecorator={<AddRoundedIcon />}
                     size="sm"
-                >
-                    New meeting
-                </Button>
+                    name="New Note"
+                    people={people}
+
+                />
 
             </Stack>
             <Box sx={{ px: 2, pb: 1.5 }}>
@@ -63,6 +65,7 @@ export default function MeetingList({meetings, selectedMeetingID, setSelectedMee
                         key={Index}
                         selectedMeetingID={selectedMeetingID}
                         setSelectedMeeting={setSelectedMeeting}
+                        setSelectedMeetingAttendees={setSelectedMeetingAttendees}
                         meeting={meeting}
                     />
                 ))}

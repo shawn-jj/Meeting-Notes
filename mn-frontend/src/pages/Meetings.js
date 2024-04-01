@@ -9,18 +9,26 @@ import MeetingDetails from '../components/MeetingDetails';
 import MeetingList from '../components/MeetingList';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
-import { loadMeetings } from "../utils/Client"
+import { loadMeetings, loadPeople } from "../utils/Client"
 
 export default function Meetings() {
 
+    // Variables for getting people
+    const [people, setPeople] = useState([]);
     // Variables for getting meetings
     const [meetings, setMeetings] = useState([]);
     const [selectedMeeting, setSelectedMeeting] = useState([]);
+    // Variables for getting meeting attendees
+    const [selectedMeetingAttendees, setSelectedMeetingAttendees] = useState([]);
 
     useEffect(() => {
 
         loadMeetings().then(res => {
             setMeetings(res.data)
+        })
+
+        loadPeople().then(res => {
+            setPeople(res.data)
         })
 
     }, []);
@@ -64,13 +72,19 @@ export default function Meetings() {
                             {/* meeting list */}
                             <MeetingList
                                 meetings={meetings}
+                                people={people}
                                 selectedMeetingID={selectedMeeting.meetingID}
                                 setSelectedMeeting={setSelectedMeeting}
+                                setSelectedMeetingAttendees={setSelectedMeetingAttendees}
                             />
                         </Sheet>
 
                         {/* meeting content */}
-                        <MeetingDetails meeting={selectedMeeting} />
+                        <MeetingDetails 
+                            meeting={selectedMeeting} 
+                            people={people}
+                            attendees={Object.values(selectedMeetingAttendees)}
+                        />
                     </Sheet>
                 </Box>
 

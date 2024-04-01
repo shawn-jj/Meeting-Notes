@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import * as React from 'react';
 import Box from '@mui/joy/Box';
 import ListDivider from '@mui/joy/ListDivider';
 import ListItem from '@mui/joy/ListItem';
@@ -6,21 +6,21 @@ import ListItemButton from '@mui/joy/ListItemButton';
 import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
 
-import AvatarGroupWithSize from './AvatarGroupWithSize';
+import AvatarGroupWithNumber from './AvatarGroupWithNumber';
 import { loadAttendeesByMeetingID } from "../utils/Client"
 import { toggleMeetingDetails } from '../utils/DrawerConfig';
 
 
-export default function MeetingListItem({ meeting, selectedMeetingID, setSelectedMeeting}) {
+export default function MeetingListItem({ meeting, selectedMeetingID, setSelectedMeeting, setSelectedMeetingAttendees }) {
 
     // Variables for getting attendees
-    const [attendees, setAttendees] = useState([]);
+    const [attendees, setAttendees] = React.useState([]);
 
-    useEffect(() => {
+    React.useEffect(() => {
 
         loadAttendeesByMeetingID(meeting.meetingID).then(res => {
             setAttendees(res.data)
-        });
+        })
 
     }, []);
 
@@ -31,6 +31,7 @@ export default function MeetingListItem({ meeting, selectedMeetingID, setSelecte
                     onClick={() => {
                         toggleMeetingDetails();
                         setSelectedMeeting({ ...meeting });
+                        setSelectedMeetingAttendees({ ...attendees });
                     }}
                     selected={selectedMeetingID === meeting.meetingID}
                     color="neutral"
@@ -52,7 +53,7 @@ export default function MeetingListItem({ meeting, selectedMeetingID, setSelecte
                             }}
                         >
                             {/* Attendees images */}
-                            <AvatarGroupWithSize
+                            <AvatarGroupWithNumber
                                 people={attendees}
                                 maxNum={2}
                             />

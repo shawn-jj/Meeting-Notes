@@ -1,9 +1,9 @@
-import React from 'react'
-
+import * as React from 'react';
 import Avatar from '@mui/joy/Avatar';
 import AvatarGroup from '@mui/joy/AvatarGroup';
+import Tooltip from '@mui/joy/Tooltip';
 
-export default function AvatarGroupWithSize({ people, maxNum }) {
+export default function AvatarGroupWithNumber({ people, maxNum }) {
 
     // Calculate displayed avatars
     function clampAvatars(avatars, options = { max: 5 }) {
@@ -29,12 +29,14 @@ export default function AvatarGroupWithSize({ people, maxNum }) {
         <AvatarGroup size="sm">
             {
                 avatars.map((avatar, index) => (
-                    <Avatar key={index}>
-                        {
-                            // Handle the display of names with one or two words
-                            avatar.name.includes(' ') ? avatar.name.split(' ')[0][0] + avatar.name.split(' ')[1][0] : avatar.name.split(' ')[0][0]
-                        }
-                    </Avatar>
+                    <Tooltip title={avatar.name} variant="outlined">
+                        <Avatar key={index}>
+                            {
+                                // Handle the display of names with one or two words
+                                avatar.name.includes(' ') ? avatar.name.split(' ')[0][0] + avatar.name.split(' ')[1][0] : avatar.name.split(' ')[0][0]
+                            }
+                        </Avatar>
+                    </Tooltip>
                 ))
             }
             {!!surplus && <Avatar>+{surplus}</Avatar>}

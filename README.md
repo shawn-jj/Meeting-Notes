@@ -3,18 +3,20 @@ A tool to take and manage your meeting notes
 
 # Preview
 ![preview](/assets/preview-v070-1.jpg "Meetings-no-select")
-![preview](/assets/preview-v070-2.jpg "Meetings")
+![preview](/assets/preview-v080-1.jpg "Meetings")
+![preview](/assets/preview-v080-2.jpg "Edit-meeting")
 ![preview](/assets/preview-v060-2.jpg "People")
 
 # Next step
 
 - Implement add / edit / delete meetings function
 - Refactor people page
-- Implement filter on people page
-- Implement login and register function
 
 # Work done
 
+- Added tooltips to display name of attendee avatars
+- Implemented UI for new note and edit note
+- Refactored meetings page again to increase display area
 - Refactored meetings page
 - Displayed people in people filter 
 - Displayed people data as cards

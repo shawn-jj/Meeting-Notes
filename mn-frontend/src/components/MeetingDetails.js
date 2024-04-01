@@ -1,12 +1,14 @@
 import * as React from 'react';
 import Box from '@mui/joy/Box';
+import Card from '@mui/joy/Card';
 import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
+import Grid from '@mui/joy/Grid';
 
 import MeetingDetailsHeader from './MeetingDetailsHeader';
+import AvatarGroupWithNumber from './AvatarGroupWithNumber';
 
-
-export default function MeetingDetails({ meeting }) {
+export default function MeetingDetails({ meeting, people, attendees }) {
 
   // Havn't selected a meeting to read
   if (meeting.meetingID == null) {
@@ -51,23 +53,66 @@ export default function MeetingDetails({ meeting }) {
         }}
       >
         <MeetingDetailsHeader
-          meetingTopic={meeting.meetingTopic}
-          meetingDate={meeting.meetingDate}
+          meeting={meeting}
+          people={people}
+          attendees={attendees}
         />
+
         <Box
           sx={{
             display: 'flex',
             flex: 1,
             minHeight: 0,
-            px: 2,
-            py: 3,
-            overflowY: 'scroll',
+            pl: 1,
+            pt: 1,
             flexDirection: 'column',
           }}
         >
-  
-          <Typography>{meeting.meetingNote}</Typography>
-  
+
+          <Card
+            variant="outlined"
+            sx={{
+              px: 3,
+              py: 3,
+              maxHeight: 'max-content',
+              maxWidth: '100%',
+              height: '100%',
+              overflowY: 'scroll',
+            }}
+          >
+
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="flex-start"
+            >
+
+              <Typography level="title-md">
+                Attendees:
+                <AvatarGroupWithNumber
+                  people={attendees}
+                  maxNum="30"
+                />
+              </Typography>
+
+              <Box>
+                <Typography level="title-md">
+                  Location:
+                </Typography>
+
+                <Typography level="body-md">
+                  {meeting.location}
+                </Typography>
+              </Box>
+            </Grid>
+
+            <Typography level="title-md">
+              Notes:
+            </Typography>
+            <Typography> {meeting.meetingNote} </Typography>
+
+          </Card>
         </Box>
       </Sheet>
     )

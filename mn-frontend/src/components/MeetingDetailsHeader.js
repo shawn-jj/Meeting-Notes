@@ -1,14 +1,16 @@
 import * as React from 'react';
-import Button from '@mui/joy/Button';
 import IconButton from '@mui/joy/IconButton';
 import Stack from '@mui/joy/Stack';
 import Typography from '@mui/joy/Typography';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
-import { toggleMeetingDetails } from '../utils/DrawerConfig';
-import EditRoundedIcon from '@mui/icons-material/EditRounded';
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
-export default function MeetingDetailsHeader({meetingTopic, meetingDate}) {
+import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+import EditRoundedIcon from '@mui/icons-material/EditRounded';
+
+import { toggleMeetingDetails } from '../utils/DrawerConfig';
+import ConfirmDeleteButton from './ConfirmDeleteButton';
+import MeetingFormButton from './MeetingFormButton';
+
+export default function MeetingDetailsHeader({ meeting, people, attendees }) {
 
   return (
     <Stack
@@ -22,7 +24,7 @@ export default function MeetingDetailsHeader({meetingTopic, meetingDate}) {
       py={{ xs: 2, md: 2 }}
       px={{ xs: 1, md: 2 }}
     >
-        
+
       <Stack direction="row" spacing={{ xs: 1, md: 2 }} alignItems="center">
 
         {/* Back button for mobile */}
@@ -44,29 +46,28 @@ export default function MeetingDetailsHeader({meetingTopic, meetingDate}) {
             component="h2"
             noWrap
           >
-            {meetingTopic}
+            {meeting.meetingTopic}
           </Typography>
-          <Typography level="body-sm">{meetingDate}</Typography>
+          <Typography level="body-sm">{meeting.meetingDate} {meeting.startTime.substring(0, 5)}-{meeting.endTime.substring(0, 5)}</Typography>
         </div>
       </Stack>
 
       <Stack spacing={1} direction="row" alignItems="center">
-        <Button
-          startDecorator={<EditRoundedIcon />}
+
+        {/* Edit button */}
+        <MeetingFormButton
           color="primary"
           variant="outlined"
+          startDecorator={<EditRoundedIcon />}
           size="sm"
-        >
-          Edit
-        </Button>
-        <Button
-          startDecorator={<DeleteRoundedIcon />}
-          color="danger"
-          variant="outlined"
-          size="sm"
-        >
-          Delete
-        </Button>
+          name="Edit"
+          meeting={meeting}
+          people={people}
+          attendees={attendees}
+        />
+
+        <ConfirmDeleteButton />
+
       </Stack>
     </Stack>
   );
