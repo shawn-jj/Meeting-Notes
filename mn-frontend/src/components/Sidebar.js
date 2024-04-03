@@ -104,7 +104,7 @@ export default function Sidebar({ currentPage }) {
 
           <ListItem>
             <ListItemButton
-              selected={currentPage == "Dashboard"}
+              selected={currentPage === "Dashboard"}
               component="a"
               href="/"
             >
@@ -117,7 +117,7 @@ export default function Sidebar({ currentPage }) {
 
           <ListItem>
             <ListItemButton
-              selected={currentPage == "Meetings"}
+              selected={currentPage === "Meetings"}
               component="a"
               href="/meetings"
             >
@@ -130,7 +130,7 @@ export default function Sidebar({ currentPage }) {
 
           <ListItem>
             <ListItemButton
-              selected={currentPage == "My profile"}
+              selected={currentPage === "My profile"}
               component="a"
               href="/profile"
             >
@@ -143,7 +143,7 @@ export default function Sidebar({ currentPage }) {
 
           <ListItem>
             <ListItemButton
-              selected={currentPage == "People"}
+              selected={currentPage === "People"}
               component="a"
               href="/people"
             >

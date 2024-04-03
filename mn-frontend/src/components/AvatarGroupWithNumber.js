@@ -29,7 +29,7 @@ export default function AvatarGroupWithNumber({ people, maxNum }) {
         <AvatarGroup size="sm">
             {
                 avatars.map((avatar, index) => (
-                    <Tooltip title={avatar.name} variant="outlined">
+                    <Tooltip key={index} title={avatar.name} variant="outlined">
                         <Avatar key={index}>
                             {
                                 // Handle the display of names with one or two words

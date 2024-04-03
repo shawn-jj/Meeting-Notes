@@ -7,6 +7,9 @@ import com.meetingNotes.mnbackend.service.MeetingService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +31,17 @@ public class MeetingController {
     @GetMapping("/{meetingID}")
     public Meeting getMeetingByID(@PathVariable("meetingID") int meetingID) {
         return meetingService.getMeetingByID(meetingID);
+    }
+
+    @PutMapping("/update/{updateMeetingID}")
+    public void updateMeeting(
+            @PathVariable("updateMeetingID") int meetingID,
+            @RequestBody Meeting meeting) {
+        meetingService.updateMeeting(meetingID, meeting);
+    }
+
+    @PostMapping("/create")
+    public void createMeeting(@RequestBody Meeting meeting) {
+        meetingService.createMeeting(meeting);
     }
 }

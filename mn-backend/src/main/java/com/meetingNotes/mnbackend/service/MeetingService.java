@@ -23,4 +23,15 @@ public class MeetingService {
         return meetingDAO.selectMeetingByID(meetingID)
                 .orElseThrow( () -> new RuntimeException("Meeting not found"));
     }
+
+    public void updateMeeting(int meetingID, Meeting meeting) {
+        meetingDAO.updateMeeting(meetingID, meeting);
+    }
+
+    public void createMeeting(Meeting meeting) {
+        int maxMeetingID = meetingDAO.selectMaxMeetingID();
+        meeting.setMeetingID(maxMeetingID);
+
+        meetingDAO.insertMeeting(meeting);
+    }
 }

@@ -11,7 +11,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import MeetingListItem from './MeetingListItem';
 import MeetingFormButton from './MeetingFormButton';
 
-export default function MeetingList({ meetings, people, selectedMeetingID, setSelectedMeeting, setSelectedMeetingAttendees }) {
+export default function MeetingList({ meetings, people, selectedMeetingID, setSelectedMeeting, setSelectedMeetingAttendees, loadDataOfMeeting }) {
 
     return (
         <Sheet
@@ -41,7 +41,7 @@ export default function MeetingList({ meetings, people, selectedMeetingID, setSe
                     size="sm"
                     name="New Note"
                     people={people}
-
+                    loadDataOfMeeting={loadDataOfMeeting}
                 />
 
             </Stack>

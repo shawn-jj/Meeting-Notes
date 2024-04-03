@@ -9,11 +9,15 @@ A tool to take and manage your meeting notes
 
 # Next step
 
-- Implement add / edit / delete meetings function
+- Implement add meeting attendees function
+- Implement delete meetings function
 - Refactor people page
 
 # Work done
 
+- Implement add / edit meetings function
+- Reload data when save a meeting without reload the page by passing loadData()
+- Added input for selecting meeting date and time
 - Added tooltips to display name of attendee avatars
 - Implemented UI for new note and edit note
 - Refactored meetings page again to increase display area

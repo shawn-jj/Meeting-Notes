@@ -5,24 +5,20 @@ import java.sql.Time;
 
 public class Meeting {
     private Integer meetingID;
-    private Integer createPeopleID;
     private String meetingTopic;
     private String meetingNote;
     private String location;
     private Date meetingDate;
-    private Date createDate;
     private Time startTime;
     private Time endTime;
 
-    public Meeting(Integer meetingID, Integer createPeopleID, String meetingName, String meetingNote,
-                   String location, Date meetingDate, Date createDate, Time startTime, Time endTime) {
+    public Meeting(Integer meetingID, String meetingName, String meetingNote,
+                   String location, Date meetingDate, Time startTime, Time endTime) {
         this.meetingID = meetingID;
-        this.createPeopleID = createPeopleID;
         this.meetingTopic = meetingName;
         this.meetingNote = meetingNote;
         this.location = location;
         this.meetingDate = meetingDate;
-        this.createDate = createDate;
         this.startTime = startTime;
         this.endTime = endTime;
     }
@@ -49,14 +45,6 @@ public class Meeting {
 
     public void setMeetingID(Integer meetingID) {
         this.meetingID = meetingID;
-    }
-
-    public Integer getCreatePeopleID() {
-        return createPeopleID;
-    }
-
-    public void setCreatePeopleID(Integer createPeopleID) {
-        this.createPeopleID = createPeopleID;
     }
 
     public String getMeetingTopic() {
@@ -91,11 +79,4 @@ public class Meeting {
         this.meetingDate = meetingDate;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
 }

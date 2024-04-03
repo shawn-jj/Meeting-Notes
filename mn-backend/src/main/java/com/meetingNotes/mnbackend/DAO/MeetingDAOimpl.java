@@ -24,7 +24,6 @@ public class MeetingDAOimpl implements MeetingDAO {
         String sql = """
                 SELECT * FROM meeting
                 """;
-
         List<Meeting> meetings = jdbcTemplate.query(sql, meetingRowMapper);
 
         return meetings;
@@ -35,9 +34,55 @@ public class MeetingDAOimpl implements MeetingDAO {
         String sql = """
                 SELECT * FROM meeting WHERE meetingID = ?
                 """;
-
         Optional<Meeting> meeting = jdbcTemplate.query(sql, meetingRowMapper, meetingID).stream().findFirst();
 
         return meeting;
+    }
+
+    @Override
+    public int selectMaxMeetingID() {
+        String sql = """
+                SELECT max(meetingID) FROM meeting
+                """;
+        int maxMeetingID = jdbcTemplate.queryForObject(sql, Integer.class);
+
+        return maxMeetingID + 1;
+    }
+
+    @Override
+    public void updateMeeting(int meetingID, Meeting meeting) {
+        String sql = """
+                UPDATE meeting
+                SET meetingTopic = ?, meetingNote = ?, location = ?, meetingDate = ?, startTime = ?, endTime = ?
+                WHERE meetingID = ?
+                """;
+        jdbcTemplate.update(
+                sql,
+                meeting.getMeetingTopic(),
+                meeting.getMeetingNote(),
+                meeting.getLocation(),
+                meeting.getMeetingDate(),
+                meeting.getStartTime(),
+                meeting.getEndTime(),
+                meetingID
+        );
+    }
+
+    @Override
+    public void insertMeeting(Meeting meeting) {
+        var sql = """
+                INSERT INTO meeting (meetingID, meetingTopic, meetingNote, location, meetingDate, startTime, endTime)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """;
+        jdbcTemplate.update(
+                sql,
+                meeting.getMeetingID(),
+                meeting.getMeetingTopic(),
+                meeting.getMeetingNote(),
+                meeting.getLocation(),
+                meeting.getMeetingDate(),
+                meeting.getStartTime(),
+                meeting.getEndTime()
+        );
     }
 }
