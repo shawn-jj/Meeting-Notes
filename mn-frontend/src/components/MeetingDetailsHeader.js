@@ -10,7 +10,7 @@ import { toggleMeetingDetails } from '../utils/DrawerConfig';
 import ConfirmDeleteButton from './ConfirmDeleteButton';
 import MeetingFormButton from './MeetingFormButton';
 
-export default function MeetingDetailsHeader({ meeting, people, attendees }) {
+export default function MeetingDetailsHeader({ meeting, people, attendees, loadMeetingData }) {
 
   return (
     <Stack
@@ -66,7 +66,11 @@ export default function MeetingDetailsHeader({ meeting, people, attendees }) {
           attendees={attendees}
         />
 
-        <ConfirmDeleteButton />
+        {/* Delete button */}
+        <ConfirmDeleteButton 
+          meetingID={meeting.meetingID}
+          loadMeetingData={loadMeetingData}
+        />
 
       </Stack>
     </Stack>

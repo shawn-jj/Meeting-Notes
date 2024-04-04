@@ -10,8 +10,26 @@ import ModalDialog from '@mui/joy/ModalDialog';
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
-export default function ConfirmDeleteButton() {
+import { deleteMeeting, deleteMeetingAttendees } from '../utils/Client';
+import SnackbarWithDecorators from './SnackbarWithDecorators';
+
+export default function ConfirmDeleteButton({ meetingID, loadMeetingData }) {
   const [open, setOpen] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+
+  const handleDelete = () => {
+    deleteMeeting(meetingID).then(res => {
+      deleteMeetingAttendees(meetingID).then(res => {
+        loadMeetingData(); // does not update all data
+        setOpen(false);
+        setSnackbarOpen(true);
+      });
+    }).finally(() => {
+      setSnackbarOpen(false);
+      setTimeout(() => (window.location.reload()), 2500) // refresh the page
+    });
+  }
+
   return (
     <React.Fragment>
       <Button
@@ -34,7 +52,7 @@ export default function ConfirmDeleteButton() {
             Are you sure you want to discard this note?
           </DialogContent>
           <DialogActions>
-            <Button variant="solid" color="danger" onClick={() => setOpen(false)}>
+            <Button variant="solid" color="danger" onClick={() => handleDelete()}>
               Discard Note
             </Button>
             <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
@@ -43,6 +61,11 @@ export default function ConfirmDeleteButton() {
           </DialogActions>
         </ModalDialog>
       </Modal>
+      {
+        snackbarOpen && (
+          <SnackbarWithDecorators message="Your note was deleted successfully." />
+        )
+      }
     </React.Fragment>
   );
 }

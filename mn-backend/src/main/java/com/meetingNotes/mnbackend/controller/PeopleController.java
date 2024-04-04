@@ -2,11 +2,16 @@ package com.meetingNotes.mnbackend.controller;
 
 import java.util.List;
 
+import com.meetingNotes.mnbackend.entity.Meeting;
 import com.meetingNotes.mnbackend.entity.People;
 import com.meetingNotes.mnbackend.service.PeopleService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,4 +39,18 @@ public class PeopleController {
     public List<People> getAttendeesByMeetingID(@PathVariable("meetingID") int meetingID) {
         return peopleService.getAttendeesByMeetingID(meetingID);
     }
+
+    @PutMapping("/attendees/update/{meetingID}")
+    public void updateAttendeesByMeetingID(
+            @PathVariable("meetingID") int meetingID,
+            @RequestBody List<Integer> peopleIDList) {
+        peopleService.insertAttendeesByMeetingID(meetingID, peopleIDList);
+    }
+
+    @DeleteMapping("/delete/{meetingID}")
+    public void deleteAttendeesByMeetingID(@PathVariable("meetingID") int meetingID) {
+        peopleService.deleteAttendeesByMeetingID(meetingID);
+    }
+
+
 }

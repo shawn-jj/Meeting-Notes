@@ -8,7 +8,7 @@ import Grid from '@mui/joy/Grid';
 import MeetingDetailsHeader from './MeetingDetailsHeader';
 import AvatarGroupWithNumber from './AvatarGroupWithNumber';
 
-export default function MeetingDetails({ meeting, people, attendees }) {
+export default function MeetingDetails({ meeting, people, attendees, loadMeetingData }) {
 
   // Havn't selected a meeting to read
   if (meeting.meetingID == null) {
@@ -56,6 +56,7 @@ export default function MeetingDetails({ meeting, people, attendees }) {
           meeting={meeting}
           people={people}
           attendees={attendees}
+          loadMeetingData={loadMeetingData}
         />
 
         <Box
@@ -88,12 +89,15 @@ export default function MeetingDetails({ meeting, people, attendees }) {
               alignItems="flex-start"
             >
 
+            
               <Typography level="title-md">
                 Attendees:
+                <Box>
                 <AvatarGroupWithNumber
                   people={attendees}
                   maxNum="30"
                 />
+                </Box>
               </Typography>
 
               <Box>

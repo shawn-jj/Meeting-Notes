@@ -22,7 +22,7 @@ public class MeetingDAOimpl implements MeetingDAO {
     @Override
     public List<Meeting> selectAllMeetings() {
         String sql = """
-                SELECT * FROM meeting
+                SELECT * FROM meeting ORDER BY meetingDate DESC
                 """;
         List<Meeting> meetings = jdbcTemplate.query(sql, meetingRowMapper);
 
@@ -46,7 +46,7 @@ public class MeetingDAOimpl implements MeetingDAO {
                 """;
         int maxMeetingID = jdbcTemplate.queryForObject(sql, Integer.class);
 
-        return maxMeetingID + 1;
+        return maxMeetingID;
     }
 
     @Override
@@ -84,5 +84,13 @@ public class MeetingDAOimpl implements MeetingDAO {
                 meeting.getStartTime(),
                 meeting.getEndTime()
         );
+    }
+
+    @Override
+    public void deleteMeetingByID(int meetingID) {
+        var sql = """
+                DELETE FROM meeting WHERE meetingID = ?
+                """;
+        jdbcTemplate.update(sql, meetingID);
     }
 }

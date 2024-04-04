@@ -4,19 +4,24 @@ A tool to take and manage your meeting notes
 # Preview
 ![preview](/assets/preview-v070-1.jpg "Meetings-no-select")
 ![preview](/assets/preview-v080-1.jpg "Meetings")
-![preview](/assets/preview-v080-2.jpg "Edit-meeting")
+![preview](/assets/preview-v090.jpg "Edit-meeting")
 ![preview](/assets/preview-v060-2.jpg "People")
 
 # Next step
 
-- Implement add meeting attendees function
-- Implement delete meetings function
 - Refactor people page
+- Store/display meeting notes in reach text instead of plain text
 
 # Work done
 
-- Implement add / edit meetings function
-- Reload data when save a meeting without reload the page by passing loadData()
+- Implemented automatically fill in the current date and time when creating meeting notes
+- Added snackbar prompt when add/edit/delete meeting notes
+- Removed HTML form in meetingForm
+- Implemented meeting notes display in descending date order
+- Implemented add meeting attendees function
+- Implemented add/edit/delete meeting notes function
+- Handled meeting notes without attendees
+- ~~Reload data when save a meeting note without reload the page by passing loadMeetingData()~~ (It does not update all data)
 - Added input for selecting meeting date and time
 - Added tooltips to display name of attendee avatars
 - Implemented UI for new note and edit note

@@ -30,8 +30,12 @@ public class MeetingService {
 
     public void createMeeting(Meeting meeting) {
         int maxMeetingID = meetingDAO.selectMaxMeetingID();
-        meeting.setMeetingID(maxMeetingID);
+        meeting.setMeetingID(maxMeetingID + 1);
 
         meetingDAO.insertMeeting(meeting);
+    }
+
+    public void deleteMeetingByID(int meetingID) {
+        meetingDAO.deleteMeetingByID(meetingID);
     }
 }

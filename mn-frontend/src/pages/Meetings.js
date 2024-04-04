@@ -22,13 +22,13 @@ export default function Meetings() {
     const [selectedMeetingAttendees, setSelectedMeetingAttendees] = useState([]);
 
     // Reload data when save a meeting without reload the page
-    const loadDataOfMeeting = () => {
+    const loadMeetingData = () => {
         loadMeetings().then(res => { setMeetings(res.data) });
-        loadPeople().then(res => { setPeople(res.data) });
     }
 
     useEffect(() => {
-        loadDataOfMeeting();
+        loadMeetingData();
+        loadPeople().then(res => { setPeople(res.data) });
     }, []);
 
     return (
@@ -74,7 +74,7 @@ export default function Meetings() {
                                 selectedMeetingID={selectedMeeting.meetingID}
                                 setSelectedMeeting={setSelectedMeeting}
                                 setSelectedMeetingAttendees={setSelectedMeetingAttendees}
-                                loadDataOfMeeting={loadDataOfMeeting}
+                                loadMeetingData={loadMeetingData}
                             />
                         </Sheet>
 
@@ -83,6 +83,7 @@ export default function Meetings() {
                             meeting={selectedMeeting} 
                             people={people}
                             attendees={Object.values(selectedMeetingAttendees)}
+                            loadMeetingData={loadMeetingData}
                         />
                     </Sheet>
                 </Box>

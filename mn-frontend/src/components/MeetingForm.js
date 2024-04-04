@@ -15,9 +15,13 @@ import Textarea from '@mui/joy/Textarea';
 
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 
-import { updateMeeting, createMeeting } from "../utils/Client"
+import { updateMeeting, createMeeting, updateAttendees } from "../utils/Client"
 
-export default function MeetingForm({ setOpen, name, people, attendees, meeting, loadDataOfMeeting }) {
+export default function MeetingForm({ loadMeetingData, setOpen, setSnackbarOpen, name, people, attendees, meeting }) {
+
+    const now = new Date();
+    const nowDate = now.getFullYear() + "-" + ('0' + (now.getMonth() + 1)).slice(-2) + "-" + ('0' + now.getDate()).slice(-2);
+    const nowTime = ('0' + now.getHours()).slice(-2) + ":" + ('0' + now.getMinutes()).slice(-2) + ":00";
 
     const [meetingID, setMeetingID] = useState([]);
     const [meetingTopic, setMeetingTopic] = useState([]);
@@ -38,38 +42,49 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
         endTime,
     }
 
-    const updateAttendeesData = { attendeesList }
+    // Asynchronous ajax returns the data list and then renders the component after getting the value.
+    const attendeesIDList = attendeesList && attendeesList.map(attendeesData => attendeesData.peopleID);
 
     useEffect(() => {
-        setMeetingID(meeting == null ? 0 : meeting.meetingID)
-        setMeetingTopic(meeting == null ? "" : meeting.meetingTopic)
-        setMeetinNote(meeting == null ? "" : meeting.meetingNote)
-        setLocation(meeting == null ? "" : meeting.location)
-        setMeetingDate(meeting == null ? "" : meeting.meetingDate)
-        setStartTime(meeting == null ? "" : meeting.startTime)
-        setEndTime(meeting == null ? "" : meeting.endTime)
-        setAttendeesList(attendees)
+        setMeetingID(meeting == null ? 0 : meeting.meetingID);
+        setMeetingTopic(meeting == null ? "" : meeting.meetingTopic);
+        setMeetinNote(meeting == null ? "" : meeting.meetingNote);
+        setLocation(meeting == null ? "" : meeting.location);
+        setMeetingDate(meeting == null ? nowDate : meeting.meetingDate);
+        setStartTime(meeting == null ? nowTime : meeting.startTime);
+        setEndTime(meeting == null ? nowTime : meeting.endTime);
+        setAttendeesList(attendees);
     }, [meeting]);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        
-        if (meetingID == 0) {
-            createMeeting(meetingData).then(res => {
-                // console.log(res);
-            });
-        }
-        else {
-            updateMeeting(meetingID, meetingData).then(res => {
-                // console.log(res);
-            });
-        }
-        loadDataOfMeeting();
-        setOpen(false);
-    };
+    // meetingID === 0
+    const handleCreate = () => {
+        createMeeting(meetingData).then(res => {
+            updateAttendees(meetingID, attendeesIDList).then(res => {
+                loadMeetingData(); // does not update all data
+                setOpen(false);
+                setSnackbarOpen(true);
+            })
+        }).finally(() => {
+            // setSnackbarOpen(false);
+            setTimeout(() => (window.location.reload()), 2500) // refresh the page
+        });
+    }
+
+    // // meetingID !== 0
+    const handleUpdate = () => {
+        updateMeeting(meetingID, meetingData).then(res => {
+            updateAttendees(meetingID, attendeesIDList).then(res => {
+                // loadMeetingData(); // bug: loadMeetingData() is not a function
+                setOpen(false);
+                setSnackbarOpen(true);
+            })
+        }).finally(() => {
+            // setSnackbarOpen(false);
+            setTimeout(() => (window.location.reload()), 2500) // refresh the page
+        });
+    }
 
     return (
-        <form onSubmit={handleSubmit} id="meetingForm">
         <Sheet
             sx={{
                 borderRadius: 'md',
@@ -77,7 +92,7 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 2,
-                height: '120%', // 100% is okay, but display bug caused by <form>
+                height: '100%',
             }}
         >
             <DialogTitle>{name}</DialogTitle>
@@ -96,7 +111,6 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
                     <Input
                         value={meetingTopic}
                         onChange={(event) => setMeetingTopic(event.target.value)}
-                        required
                     />
                 </FormControl>
 
@@ -112,7 +126,6 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
                         }}
                         value={meetingDate}
                         onChange={(event) => setMeetingDate(event.target.value)}
-                        required
                     />
                 </FormControl>
 
@@ -130,8 +143,7 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
                     <Input
                         type="time"
                         value={startTime}
-                        onChange={(event) => setStartTime(event.target.value+":00")}
-                        required
+                        onChange={(event) => setStartTime(event.target.value + ":00")}
                     />
                 </FormControl>
 
@@ -140,8 +152,7 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
                     <Input
                         type="time"
                         value={endTime}
-                        onChange={(event) => setEndTime(event.target.value+":00")}
-                        required
+                        onChange={(event) => setEndTime(event.target.value + ":00")}
                     />
                 </FormControl>
 
@@ -149,11 +160,11 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
                     <FormLabel>Attendees</FormLabel>
                     <Autocomplete
                         key={attendees}
-                        isOptionEqualTo={(option, value) => option.peopleID === value.peopleID}
+                        isOptionEqualToValue={(option, value) => option.peopleID === value.peopleID}
                         multiple
                         options={people}
                         getOptionLabel={(option) => option.name}
-                        default={attendees}
+                        defaultValue={attendees}
                         onChange={(event, value) => setAttendeesList(value)}
                     />
                 </FormControl>
@@ -186,11 +197,23 @@ export default function MeetingForm({ setOpen, name, people, attendees, meeting,
                     Cancel
                 </Button>
 
-                <Button type="submit">
-                    Save
-                </Button>
+                {
+                    // save new meeting
+                    meetingID === 0 && (
+                        <Button onClick={() => handleCreate()}>
+                            Save
+                        </Button>
+                    )
+                }
+                {
+                    // save edited meeting
+                    meetingID !== 0 && (
+                        <Button onClick={() => handleUpdate()}>
+                            Save
+                        </Button>
+                    )
+                }
             </Stack>
         </Sheet>
-        </form>
     )
 }

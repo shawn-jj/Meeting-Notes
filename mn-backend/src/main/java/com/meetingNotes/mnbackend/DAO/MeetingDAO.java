@@ -12,4 +12,5 @@ public interface MeetingDAO {
     int selectMaxMeetingID();
     void updateMeeting(int meetingID, Meeting meeting);
     void insertMeeting(Meeting meeting);
+    void deleteMeetingByID(int meetingID);
 }

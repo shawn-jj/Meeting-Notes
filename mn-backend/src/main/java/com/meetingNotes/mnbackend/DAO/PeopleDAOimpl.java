@@ -59,4 +59,25 @@ public class PeopleDAOimpl implements PeopleDAO{
 
         return meetingAttendees;
     }
+
+    @Override
+    public void deleteAttendeesByMeetingID(int meetingID) {
+        var sql = """
+                DELETE FROM meetingattendees WHERE meetingID = ?
+                """;
+        jdbcTemplate.update(sql, meetingID);
+    }
+
+    @Override
+    public void insertAttendeesByMeetingID(int meetingID, int peopleID) {
+        var sql = """
+                INSERT INTO meetingattendees (meetingID, peopleID)
+                VALUES (?, ?)
+                """;
+        jdbcTemplate.update(
+                sql,
+                meetingID,
+                peopleID
+        );
+    }
 }

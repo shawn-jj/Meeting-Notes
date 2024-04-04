@@ -1,10 +1,13 @@
 import * as React from 'react';
 import Drawer from '@mui/joy/Drawer';
 import Button from '@mui/joy/Button';
-import MeetingForm from './MeetingForm';
 
-export default function MeetingFormButton({ color, variant, startDecorator, size, name, people, attendees, meeting, loadDataOfMeeting }) {
+import MeetingForm from './MeetingForm';
+import SnackbarWithDecorators from './SnackbarWithDecorators';
+
+export default function MeetingFormButton({ loadMeetingData, color, variant, startDecorator, size, name, people, attendees, meeting }) {
   const [open, setOpen] = React.useState(false);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
   return (
     <React.Fragment>
@@ -41,10 +44,15 @@ export default function MeetingFormButton({ color, variant, startDecorator, size
           attendees={attendees}
           meeting={meeting}
           setOpen={setOpen}
-          loadDataOfMeeting={loadDataOfMeeting}
+          setSnackbarOpen={setSnackbarOpen}
+          loadMeetingData={loadMeetingData}
         />
-
       </Drawer>
+      {
+        snackbarOpen && (
+          <SnackbarWithDecorators message="Your note was saved successfully." />
+        )
+      }
     </React.Fragment>
   );
 }
