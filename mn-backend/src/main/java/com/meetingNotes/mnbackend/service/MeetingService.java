@@ -24,6 +24,10 @@ public class MeetingService {
                 .orElseThrow( () -> new RuntimeException("Meeting not found"));
     }
 
+    public List<Meeting> getMeetingsByPeopleID(int peopleID) {
+        return meetingDAO.selectMeetingsByPeopleID(peopleID);
+    }
+
     public void updateMeeting(int meetingID, Meeting meeting) {
         meetingDAO.updateMeeting(meetingID, meeting);
     }

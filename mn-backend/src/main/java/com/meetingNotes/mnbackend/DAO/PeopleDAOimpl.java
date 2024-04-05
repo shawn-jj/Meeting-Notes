@@ -34,6 +34,9 @@ public class PeopleDAOimpl implements PeopleDAO{
         return people;
     }
 
+    /**
+     * not used
+     */
     @Override
     public Optional<People> selectPeopleByID(int peopleID) {
         String sql = """

@@ -29,6 +29,9 @@ public class MeetingDAOimpl implements MeetingDAO {
         return meetings;
     }
 
+    /**
+     * not used
+     */
     @Override
     public Optional<Meeting> selectMeetingByID(int meetingID) {
         String sql = """
@@ -37,6 +40,20 @@ public class MeetingDAOimpl implements MeetingDAO {
         Optional<Meeting> meeting = jdbcTemplate.query(sql, meetingRowMapper, meetingID).stream().findFirst();
 
         return meeting;
+    }
+
+    @Override
+    public List<Meeting> selectMeetingsByPeopleID(int peopleID) {
+        String sql = """
+                SELECT DISTINCT meeting.*
+                FROM meeting
+                INNER JOIN meetingattendees ON meeting.meetingID = meetingattendees.meetingID
+                WHERE meetingattendees.peopleID = ?
+                ORDER BY meetingDate DESC;
+                """;
+        List<Meeting> meetings = jdbcTemplate.query(sql, meetingRowMapper, peopleID);
+
+        return meetings;
     }
 
     @Override

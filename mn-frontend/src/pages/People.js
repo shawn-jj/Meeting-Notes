@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-
 import Autocomplete from '@mui/joy/Autocomplete';
 import Box from '@mui/joy/Box';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import Sheet from '@mui/joy/Sheet';
+import List from '@mui/joy/List';
 
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -16,44 +15,23 @@ export default function People() {
 
   // Variables for getting people
   const [people, setPeople] = useState([]);
+  const [peopleDisplay, setPeopleDisplay] = useState([]);
 
   useEffect(() => {
 
     loadPeople().then(res => {
       setPeople(res.data)
-    })
-
+    });
+    
   }, []);
 
   const peopleSearchBar = () => (
     <React.Fragment>
-      {/* For mobile display */}
-      <Sheet
-        className="SearchAndFilters-mobile"
-        sx={{
-          display: { xs: 'flex', sm: 'none' },
-          my: 1,
-          gap: 1,
-        }}
-      >
-        <Autocomplete
-          sx={{ flexGrow: 1 }}
-          multiple
-          placeholder="Search"
-          startDecorator={<SearchIcon />}
-          limitTags={3}
-          options={people}
-          getOptionLabel={(option) => option.name}
-        />
-      </Sheet>
-
-      {/* For PC display */}
       <Box
         className="SearchAndFilters-tabletUp"
         sx={{
           borderRadius: 'sm',
           py: 2,
-          display: { xs: 'none', sm: 'flex' },
           flexWrap: 'wrap',
           gap: 1.5,
           '& > *': {
@@ -67,9 +45,10 @@ export default function People() {
             multiple
             placeholder="Search"
             startDecorator={<SearchIcon />}
-            limitTags={5}
             options={people}
             getOptionLabel={(option) => option.name}
+            onChange={(event, value) => setPeopleDisplay(value)}
+            isOptionEqualToValue={(option, value) => option.peopleID === value.peopleID}
           />
         </FormControl>
       </Box>
@@ -82,13 +61,33 @@ export default function People() {
       PageAdditionalComponent={peopleSearchBar()}
     >
 
-      <Sheet sx={{overflowY: 'auto'}} >
+      <List
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: 2,
+          overflowY: "auto"
+        }}
+      >
         {
-          people.map((person, index) => (
-            <PeopleCard key={index} {...person} />
-          ))
+          // display selected people
+          peopleDisplay.length != 0 && (peopleDisplay.map((person, index) => (
+            <PeopleCard
+              key={index}
+              person={person}
+            />
+          )))
         }
-      </Sheet>
+        {
+          // when no one is selected, display all people
+          peopleDisplay.length == 0 && (people.map((person, index) => (
+            <PeopleCard
+              key={index}
+              person={person}
+            />
+          )))
+        }
+      </List>
 
     </SidebarWithHeader>
   )

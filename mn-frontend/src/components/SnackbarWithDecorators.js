@@ -18,15 +18,13 @@ export default function SnackbarWithDecorators({ message }) {
         startDecorator={<PlaylistAddCheckCircleRoundedIcon />}
         endDecorator={
           <Button
-            onClick={() => {
-                setSnackbarOpen(false);
-                window.location.reload();
-            }}
+            onClick={() => setSnackbarOpen(false)}
             size="sm"
             variant="soft"
             color="success"
+            autoHideDuration="3000" // 3 seconds
           >
-            Refresh
+            Dismiss
           </Button>
         }
       >

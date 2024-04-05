@@ -43,7 +43,8 @@ export default function MeetingForm({ loadMeetingData, setOpen, setSnackbarOpen,
     }
 
     // Asynchronous ajax returns the data list and then renders the component after getting the value.
-    const attendeesIDList = attendeesList && attendeesList.map(attendeesData => attendeesData.peopleID);
+    const IDList = attendeesList && attendeesList.map(attendeesData => attendeesData.peopleID);
+    const attendeesIDList = IDList == undefined ? [] : IDList;
 
     useEffect(() => {
         setMeetingID(meeting == null ? 0 : meeting.meetingID);
@@ -54,23 +55,22 @@ export default function MeetingForm({ loadMeetingData, setOpen, setSnackbarOpen,
         setStartTime(meeting == null ? nowTime : meeting.startTime);
         setEndTime(meeting == null ? nowTime : meeting.endTime);
         setAttendeesList(attendees);
-    }, [meeting]);
+    }, [meeting]); // Reset data when meeting updated
 
     // meetingID === 0
     const handleCreate = () => {
         createMeeting(meetingData).then(res => {
             updateAttendees(meetingID, attendeesIDList).then(res => {
-                loadMeetingData(); // does not update all data
+                loadMeetingData();
                 setOpen(false);
                 setSnackbarOpen(true);
             })
         }).finally(() => {
-            // setSnackbarOpen(false);
-            setTimeout(() => (window.location.reload()), 2500) // refresh the page
+            setSnackbarOpen(false);
         });
     }
 
-    // // meetingID !== 0
+    // meetingID !== 0
     const handleUpdate = () => {
         updateMeeting(meetingID, meetingData).then(res => {
             updateAttendees(meetingID, attendeesIDList).then(res => {
@@ -160,12 +160,12 @@ export default function MeetingForm({ loadMeetingData, setOpen, setSnackbarOpen,
                     <FormLabel>Attendees</FormLabel>
                     <Autocomplete
                         key={attendees}
-                        isOptionEqualToValue={(option, value) => option.peopleID === value.peopleID}
                         multiple
                         options={people}
                         getOptionLabel={(option) => option.name}
                         defaultValue={attendees}
                         onChange={(event, value) => setAttendeesList(value)}
+                        isOptionEqualToValue={(option, value) => option.peopleID === value.peopleID}
                     />
                 </FormControl>
 

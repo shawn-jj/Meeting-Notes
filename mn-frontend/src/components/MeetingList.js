@@ -60,15 +60,17 @@ export default function MeetingList({ loadMeetingData, setSelectedMeeting, setSe
                     '--ListItem-paddingX': '1rem',
                 }}
             >
-                {meetings.map((meeting, Index) => (
-                    <MeetingListItem
-                        key={Index}
-                        selectedMeetingID={selectedMeetingID}
-                        setSelectedMeeting={setSelectedMeeting}
-                        setSelectedMeetingAttendees={setSelectedMeetingAttendees}
-                        meeting={meeting}
-                    />
-                ))}
+                {
+                    meetings.map((meeting, Index) => (
+                        <MeetingListItem
+                            key={Index}
+                            selectedMeetingID={selectedMeetingID}
+                            setSelectedMeeting={setSelectedMeeting}
+                            setSelectedMeetingAttendees={setSelectedMeetingAttendees}
+                            meeting={meeting}
+                        />
+                    ))
+                }
             </List>
         </Sheet>
     );

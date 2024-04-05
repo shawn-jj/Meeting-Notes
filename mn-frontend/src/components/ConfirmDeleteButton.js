@@ -20,13 +20,12 @@ export default function ConfirmDeleteButton({ meetingID, loadMeetingData }) {
   const handleDelete = () => {
     deleteMeeting(meetingID).then(res => {
       deleteMeetingAttendees(meetingID).then(res => {
-        loadMeetingData(); // does not update all data
+        loadMeetingData();
         setOpen(false);
         setSnackbarOpen(true);
       });
     }).finally(() => {
       setSnackbarOpen(false);
-      setTimeout(() => (window.location.reload()), 2500) // refresh the page
     });
   }
 

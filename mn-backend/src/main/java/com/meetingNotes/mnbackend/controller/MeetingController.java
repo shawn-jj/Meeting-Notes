@@ -34,6 +34,11 @@ public class MeetingController {
         return meetingService.getMeetingByID(meetingID);
     }
 
+    @GetMapping("/people/{peopleID}")
+    public List<Meeting> getMeetingsByPeopleID(@PathVariable("peopleID") int peopleID) {
+        return meetingService.getMeetingsByPeopleID(peopleID);
+    }
+
     @PutMapping("/update/{updateMeetingID}")
     public void updateMeeting(
             @PathVariable("updateMeetingID") int meetingID,

@@ -1,68 +1,88 @@
 import * as React from 'react';
-import AspectRatio from '@mui/joy/AspectRatio';
+import Avatar from '@mui/joy/Avatar';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import CardActions from '@mui/joy/CardActions';
 import Typography from '@mui/joy/Typography';
-import Stack from '@mui/joy/Stack';
+import Stepper from '@mui/joy/Stepper';
+import Step from '@mui/joy/Step';
+import Sheet from '@mui/joy/Sheet';
 
-export default function PeopleCard({name, email, role}) {
-    const [flex, setFlex] = React.useState(true);
+import KeyboardArrowRightRoundedIcon from '@mui/icons-material/KeyboardArrowRightRounded';
+
+import { loadMeetingsByPeopleID } from "../utils/Client"
+
+export default function PeopleCard({ person }) {
+
+    // Variables for getting meetings
+    const [meetings, setMeetings] = React.useState([]);
+    
+    // Show 4 recent meetings
+    const meetingsDisplay = meetings.length <= 4 ? meetings : meetings.slice(0, 4); 
+
+    React.useEffect(() => {
+
+        loadMeetingsByPeopleID(person.peopleID).then(res => {
+            setMeetings(res.data)
+        });
+
+    }, []);
+
     return (
-        <Box>
-            <Stack
-                spacing={4}
-                sx={{
-                    display: 'flex',
-                    mx: 'auto',
-                    py: { xs: 1, md: 1 },
-                }}
-            >
-                <Card
-                    orientation="horizontal"
+        <Card
+            variant="outlined"
+            sx={{
+                minWidth: 300,
+            }}
+        >
+            {/* Card header */}
+            <Box sx={{ display: 'flex', gap: 2 }}>
+                <Avatar
                     variant="outlined"
-                    sx={{ boxShadow: 'none' }}
+                    sx={{ borderRadius: '50%' }}
                 >
-                    {/* How large is the image */}
-                    <AspectRatio ratio="3/4" flex={flex} sx={{ flexBasis: 100 }}>
-                        {/* <img
-                            src=""
-                        /> */}
-                        <Typography level="title-lg" component="div">
-                            {name.includes(' ') ? name.split(' ')[0][0] + name.split(' ')[1][0] : name.split(' ')[0][0]}
-                        </Typography>
-                    </AspectRatio>
-                    <CardContent>
-                        <br />
-                        <Typography level="title-lg" component="div">
-                            {name}
-                        </Typography>
-                        <Typography level="body-lg">
-                            {role}
-                        </Typography>
-                        <CardActions buttonFlex="none">
-                            <Button variant="solid" color="primary" size="sm">
-                                View profile
-                            </Button>
-                        </CardActions>
-                    </CardContent>
-                    <CardContent>
-                        <Typography level="h1">
-                            Num
-                        </Typography>
-                        <Typography>
-                            Meetings with you
-                        </Typography>
-                        <CardActions buttonFlex="none">
-                            <Button variant="outlined" color="neutral" size="sm">
-                                See details
-                            </Button>
-                        </CardActions>
-                    </CardContent>
-                </Card>
-            </Stack>
-        </Box>
+                    {
+                        // Handle the display of names with one or two words
+                        person.name.includes(' ') ? person.name.split(' ')[0][0] + person.name.split(' ')[1][0] : person.name.split(' ')[0][0]
+                    }
+                </Avatar>
+                <div>
+                    <Typography level="title-md">{person.name}</Typography>
+                    <Typography level="body-xs">{person.role}</Typography>
+                </div>
+            </Box>
+
+            <CardContent>
+                <Typography level="body-xs">Recent meetings</Typography>
+                <Sheet
+                    sx={{
+                        borderRadius: 'md',
+                        p: 2,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                    }}
+                >
+                    <Stepper orientation="vertical" sx={{ width: 200 }}>
+                        {
+                            meetingsDisplay.map((meeting, index) => (
+                                <Step key={index}>{meeting.meetingTopic}</Step>
+                            ))
+                        }
+                    </Stepper>
+                </Sheet>
+            </CardContent>
+
+            <CardActions orientation="horizontal">
+                <Button
+                    variant="plain"
+                    endDecorator={<KeyboardArrowRightRoundedIcon fontSize="small" />}
+                >
+                    View More
+                </Button>
+            </CardActions >
+        </Card>
     );
 }
