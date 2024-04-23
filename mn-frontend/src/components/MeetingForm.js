@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react';
 import Autocomplete from '@mui/joy/Autocomplete';
 import Button from '@mui/joy/Button';
 import DialogTitle from '@mui/joy/DialogTitle';
@@ -57,31 +56,49 @@ export default function MeetingForm({ loadMeetingData, setOpen, setSnackbarOpen,
         setAttendeesList(attendees);
     }, [meeting]); // Reset data when meeting updated
 
-    // meetingID === 0
+    // meetingID == 0
     const handleCreate = () => {
+
         createMeeting(meetingData).then(res => {
+
             updateAttendees(meetingID, attendeesIDList).then(res => {
+
                 loadMeetingData();
                 setOpen(false);
                 setSnackbarOpen(true);
-            })
-        }).finally(() => {
-            setSnackbarOpen(false);
+
+            }).catch(err => {
+                console.log(err);
+            });
+
+        }).catch(err => {
+            console.log(err);
         });
+
+        setSnackbarOpen(false);
     }
 
-    // meetingID !== 0
+    // meetingID != 0
     const handleUpdate = () => {
+
         updateMeeting(meetingID, meetingData).then(res => {
+
             updateAttendees(meetingID, attendeesIDList).then(res => {
+
                 // loadMeetingData(); // bug: loadMeetingData() is not a function
                 setOpen(false);
                 setSnackbarOpen(true);
-            })
-        }).finally(() => {
-            // setSnackbarOpen(false);
-            setTimeout(() => (window.location.reload()), 2500) // refresh the page
+
+            }).catch(err => {
+                console.log(err);
+            });
+
+        }).catch(err => {
+            console.log(err);
         });
+
+        setSnackbarOpen(false);
+        setTimeout(() => (window.location.reload()), 2500) // refresh the page
     }
 
     return (

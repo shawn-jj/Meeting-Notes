@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 // load a list of Meeting 'List<Meeting>'
 export const loadMeetings = async () => {
@@ -37,6 +37,12 @@ export const updateAttendees = async (meetingID, attendeesIDList) => {
 // save new meeting
 export const createMeeting = async (meeting) => {
     return await axios.post("http://localhost:8080/api/meetings/create", meeting);
+}
+
+// user login
+// returns the data of logged in user as 'People' entity
+export const userLogin = async (loginRequest) => {
+    return await axios.post("http://localhost:8080/api/people/login", loginRequest);
 }
 
 // delete meeting data

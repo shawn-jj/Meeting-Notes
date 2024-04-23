@@ -9,24 +9,35 @@ import ModalDialog from '@mui/joy/ModalDialog';
 
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import DeleteSweepRoundedIcon from '@mui/icons-material/DeleteSweepRounded';
 
 import { deleteMeeting, deleteMeetingAttendees } from '../utils/Client';
 import SnackbarWithDecorators from './SnackbarWithDecorators';
 
 export default function ConfirmDeleteButton({ meetingID, loadMeetingData }) {
+  
   const [open, setOpen] = React.useState(false);
   const [snackbarOpen, setSnackbarOpen] = React.useState(false);
 
   const handleDelete = () => {
+
     deleteMeeting(meetingID).then(res => {
+
       deleteMeetingAttendees(meetingID).then(res => {
+
         loadMeetingData();
         setOpen(false);
         setSnackbarOpen(true);
+
+      }).catch(err => {
+        console.log(err);
       });
-    }).finally(() => {
-      setSnackbarOpen(false);
+
+    }).catch(err => {
+      console.log(err);
     });
+
+    setSnackbarOpen(false);
   }
 
   return (
@@ -62,7 +73,11 @@ export default function ConfirmDeleteButton({ meetingID, loadMeetingData }) {
       </Modal>
       {
         snackbarOpen && (
-          <SnackbarWithDecorators message="Your note was deleted successfully." />
+          <SnackbarWithDecorators
+            startDecorator={<DeleteSweepRoundedIcon />}
+            color="success"
+            message="Your note was deleted successfully."
+          />
         )
       }
     </React.Fragment>

@@ -34,6 +34,20 @@ public class PeopleDAOimpl implements PeopleDAO{
         return people;
     }
 
+    @Override
+    public Optional<People> selectUserByEmailAndPassword(String email, String password) {
+        String sql = """
+                SELECT DISTINCT people.*
+                FROM people
+                LEFT JOIN user ON user.userID = people.peopleID
+                WHERE people.email = ? AND user.password= ?
+                """;
+
+        Optional<People> people = jdbcTemplate.query(sql, peopleRowMapper, email, password).stream().findFirst();
+
+        return people;
+    }
+
     /**
      * not used
      */

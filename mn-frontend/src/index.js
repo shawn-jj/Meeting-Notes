@@ -11,23 +11,25 @@ import App from './App'
 import People from './pages/People';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Dashboard />
+    path: "/login",
+    element: <Login />
   },
   {
     path: "/meetings",
-    element: <Meetings />,
+    element: <ProtectedRoute><Meetings /></ProtectedRoute>,
   },
   {
     path: "/people",
-    element: <People />,
+    element: <ProtectedRoute><People /></ProtectedRoute>,
   },
   {
     path: "/profile",
-    element: <Profile />
+    element: <ProtectedRoute><Profile /></ProtectedRoute>,
   },
 ]);
 

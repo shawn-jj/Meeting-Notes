@@ -20,6 +20,8 @@ export default function MeetingListItem({ meeting, selectedMeetingID, setSelecte
 
         loadAttendeesByMeetingID(meeting.meetingID).then(res => {
             setAttendees(res.data)
+        }).catch(err => {
+            console.log(err);
         });
 
     }, [meeting]); // Reload attendees when meeting updated

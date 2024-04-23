@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Autocomplete from '@mui/joy/Autocomplete';
 import Box from '@mui/joy/Box';
 import FormControl from '@mui/joy/FormControl';
@@ -20,7 +20,9 @@ export default function People() {
   useEffect(() => {
 
     loadPeople().then(res => {
-      setPeople(res.data)
+      setPeople(res.data);
+    }).catch(err => {
+      console.log(err);
     });
     
   }, []);

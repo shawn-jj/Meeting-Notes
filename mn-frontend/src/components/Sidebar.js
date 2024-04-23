@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import Avatar from '@mui/joy/Avatar';
 import Box from '@mui/joy/Box';
@@ -22,8 +23,18 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 
 import ColorSchemeToggle from '../utils/ColorSchemeToggle';
 import { closeSidebar } from '../utils/DrawerConfig';
+import { loadUserData, logout } from '../utils/UserOperation';
 
 export default function Sidebar({ currentPage }) {
+
+  const user = loadUserData();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  }
+
   return (
     <Sheet
       className="Sidebar"
@@ -194,10 +205,15 @@ export default function Sidebar({ currentPage }) {
           src=""
         />
         <Box sx={{ minWidth: 0, flex: 1 }}>
-          <Typography level="title-sm">Shawn K.</Typography>
-          <Typography level="body-xs">Shawn@email.com</Typography>
+          <Typography level="title-sm">{user?.name}</Typography>
+          <Typography level="body-xs">{user?.email}</Typography>
         </Box>
-        <IconButton size="sm" variant="plain" color="neutral">
+        <IconButton 
+          size="sm" 
+          variant="plain" 
+          color="neutral" 
+          onClick={() => handleLogout()}
+        >
           <LogoutRoundedIcon />
         </IconButton>
       </Box>

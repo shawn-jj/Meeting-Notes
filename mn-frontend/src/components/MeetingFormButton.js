@@ -2,6 +2,8 @@ import * as React from 'react';
 import Drawer from '@mui/joy/Drawer';
 import Button from '@mui/joy/Button';
 
+import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
+
 import MeetingForm from './MeetingForm';
 import SnackbarWithDecorators from './SnackbarWithDecorators';
 
@@ -50,7 +52,11 @@ export default function MeetingFormButton({ loadMeetingData, color, variant, sta
       </Drawer>
       {
         snackbarOpen && (
-          <SnackbarWithDecorators message="Your note was saved successfully." />
+          <SnackbarWithDecorators
+            startDecorator={<PlaylistAddCheckCircleRoundedIcon />}
+            color="success"
+            message="Your note was saved successfully." 
+          />
         )
       }
     </React.Fragment>

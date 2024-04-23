@@ -2,6 +2,7 @@
 A tool to take and manage your meeting notes
 
 # Preview
+![preview](/assets/preview-v0110.jpg "Login")
 ![preview](/assets/preview-v070-1.jpg "Meetings-no-select")
 ![preview](/assets/preview-v080-1.jpg "Meetings")
 ![preview](/assets/preview-v090.jpg "Edit-meeting")
@@ -9,12 +10,23 @@ A tool to take and manage your meeting notes
 
 # Next step
 
-- Implement login and register function with security
+- Implement register function
 - Implement view more recent meetings in people page
 - Store/display meeting notes in reach text instead of plain text
 
 # Work done
 
+- Implemented logout function
+- Implemented display user information on sidebar
+- Implement automatic page switching before/after user logs in (React Router)
+  - If a non-logged-in user accesses the website, jump to the login page.
+  - If a logged-in user accesses the login page, jump to main pages.
+- Implemented remember user or not using localStorage/sessionStorage to store user data
+- Implemented store/fetch data of logged in user to/from local storage
+- Implemented login function
+- Created login page
+- Add exception handling for clinet requests
+- Optimized text and button display in people page
 - Implemented recent meetings display in people page to show 4 recent meetings
 - Refactored people page
 - Implemented filter on people page
@@ -56,3 +68,9 @@ A tool to take and manage your meeting notes
 - Created frontend (npm, React)
 - Created database (MySQL)
 - Created backend (Maven, SpringBoot)
+
+
+# Known bug
+- loadMeetingData is not a function at MeetingForm.js:81:1
+  - Temporary fix: disable loadMeetingData() when saving the edited note
+  - Refreshing the page to reload data

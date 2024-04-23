@@ -18,17 +18,19 @@ export default function PeopleCard({ person }) {
 
     // Variables for getting meetings
     const [meetings, setMeetings] = React.useState([]);
-    
+
     // Show 4 recent meetings
-    const meetingsDisplay = meetings.length <= 4 ? meetings : meetings.slice(0, 4); 
+    const meetingsDisplay = meetings.length <= 4 ? meetings : meetings.slice(0, 4);
 
     React.useEffect(() => {
 
         loadMeetingsByPeopleID(person.peopleID).then(res => {
-            setMeetings(res.data)
+            setMeetings(res.data);
+        }).catch(err => {
+            console.log(err);
         });
 
-    }, []);
+    }, [person]); // Reset data when person updated
 
     return (
         <Card
@@ -73,15 +75,26 @@ export default function PeopleCard({ person }) {
                         }
                     </Stepper>
                 </Sheet>
+                {
+                    // Display the number of undisplayed meetings when the number of meetings more than that can be displayed (4)
+                    meetings.length > 4 && (
+                        <Typography level="body-xs">...and {meetings.length-4} more</Typography>
+                    )
+                }
             </CardContent>
 
             <CardActions orientation="horizontal">
-                <Button
-                    variant="plain"
-                    endDecorator={<KeyboardArrowRightRoundedIcon fontSize="small" />}
-                >
-                    View More
-                </Button>
+                {
+                    // Display the View More button when the number of meetings more than that can be displayed (4)
+                    meetings.length > 4 && (
+                        <Button
+                            variant="plain"
+                            endDecorator={<KeyboardArrowRightRoundedIcon fontSize="small" />}
+                        >
+                            View More
+                        </Button>
+                    )
+                }
             </CardActions >
         </Card>
     );

@@ -7,6 +7,7 @@ import com.meetingNotes.mnbackend.DAO.MeetingDAO;
 import com.meetingNotes.mnbackend.DAO.PeopleDAO;
 import com.meetingNotes.mnbackend.entity.MeetingAttendees;
 import com.meetingNotes.mnbackend.entity.People;
+import com.meetingNotes.mnbackend.entity.LoginRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +23,13 @@ public class PeopleService {
 
     public List<People> getAllPeople() {
         return peopleDAO.selectAllPeople();
+    }
+
+    public People userLogin(LoginRequest loginRequest) {
+        People verifyUser = peopleDAO.selectUserByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())
+                                     .orElseThrow( () -> new RuntimeException("People not found"));
+
+        return verifyUser;
     }
 
     public People getPeopleByID(int peopleID) {

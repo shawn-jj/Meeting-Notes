@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/joy/Box';
 import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
@@ -23,12 +22,26 @@ export default function Meetings() {
 
     // Reload data when save a meeting without reload the page
     const loadMeetingData = () => {
-        loadMeetings().then(res => { setMeetings(res.data) });
+
+        loadMeetings().then(res => {
+
+            setMeetings(res.data);
+
+        }).catch(err => {
+            console.log(err);
+        });
     }
 
     useEffect(() => {
+
         loadMeetingData();
-        loadPeople().then(res => { setPeople(res.data) });
+        loadPeople().then(res => {
+
+            setPeople(res.data);
+
+        }).catch(err => {
+            console.log(err);
+        });
     }, []);
 
     return (
