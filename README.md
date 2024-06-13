@@ -10,12 +10,20 @@ A tool to take and manage your meeting notes
 
 # Next step
 
+- Implement github action to autimatic deploy process
+- Implement auto scaling group of EC2 instance(s) on ECS
 - Implement register function
-- Implement view more recent meetings in people page
+- Refactore people page into groups page
 - Store/display meeting notes in reach text instead of plain text
 
 # Work done
 
+- Deployed the docker image to AWS (AWS Elastic Beanstalk)
+- Created and connected to MySQL database on AWS (RDS)
+- Created an Elastic Container Service (ECS) cluster with an EC2 instance running on it
+- Created EC2 Key pair
+- Packaged .jar into docker image, and pushed it to docker hub (GoogleContainerTools/jib)
+- Packaged the backend source code into .jar (maven package)
 - Implemented logout function
 - Implemented display user information on sidebar
 - Implement automatic page switching before/after user logs in (React Router)

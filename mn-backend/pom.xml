@@ -9,8 +9,14 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.meetingNotes</groupId>
-	<artifactId>mn-backend</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+
+	<artifactId>mn-backend</artifactId> <!-- image name -->
+	<version>0.0.1-SNAPSHOT</version> <!-- image version -->
+	<organization>
+		<name>shawnjj</name> <!-- docker hub user name (also docker repo name) -->
+		<url>https://github.com/shawn-jj</url>
+	</organization>
+
 	<name>mn-backend</name>
 	<description>Backend for Meeting-Notes</description>
 	<properties>
@@ -43,6 +49,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.1</version>
+				<configuration>
+					<to>
+						<image>docker.io/${organization.name}/${project.artifactId}:${project.version}</image>
+						<tags>
+							<tag>latest</tag>
+						</tags>
+					</to>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
