@@ -7,14 +7,18 @@ import {
 
 import reportWebVitals from './reportWebVitals';
 import Meetings from './pages/Meetings';
-import App from './App'
 import People from './pages/People';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import ProtectedRoute from './utils/ProtectedRoute';
+import LandingPage from './pages/LandingPage';
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />
+  },
   {
     path: "/login",
     element: <Login />
