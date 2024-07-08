@@ -12,14 +12,13 @@ This change log records the update history
 
 # Work done
 
+- Run the docker image on EC2 instance
+- Created an Elastic Container Service (ECS) cluster with an EC2 instance running on it
+- Created AWS Elastic Beanstalk application to host ECS
+- Created and connected to MySQL database on EC2 instance based on AWS RDS
+- Packaged the backend source code into docker image, and pushed it to docker hub (jib, maven package)
 - Moved update history to changelog.md
 - Created landing page, and linked it to login page
-- Deployed the docker image to AWS (AWS Elastic Beanstalk)
-- Created and connected to MySQL database on AWS (RDS)
-- Created an Elastic Container Service (ECS) cluster with an EC2 instance running on it
-- Created EC2 Key pair
-- Packaged .jar into docker image, and pushed it to docker hub (GoogleContainerTools/jib)
-- Packaged the backend source code into .jar (maven package)
 - Implemented logout function
 - Implemented display user information on sidebar
 - Implement automatic page switching before/after user logs in (React Router)

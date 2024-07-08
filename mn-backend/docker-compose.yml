@@ -7,16 +7,16 @@ services:
     volumes:
       - db:/data/mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - db
     restart: unless-stopped
 
   mn-backend:
     container_name: mn-backend
-    image: shawnjj/mn-backend:0.0.1-SNAPSHOT
+    image: shawnjj/mn-backend:v1
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mn-database
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/mndb
     ports:
       - "8080:8080"
     networks:

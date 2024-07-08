@@ -3,8 +3,8 @@
 
     "containerDefinitions": [
       {
-        "name": "mn-backend-aws",
-        "image": "shawnjj/mn-backend:0.0.1-SNAPSHOT",
+        "name": "mn-backend",
+        "image": "shawnjj/mn-backend:v2",
         "essential": true,
         "memory": 512,
         "portMappings": [
@@ -16,7 +16,7 @@
         "environment": [
           {
             "name": "SPRING_DATASOURCE_URL",
-            "value": "jdbc:mysql://host:3306/ebdb"
+            "value": "jdbc:mysql://awseb-e-sejbtimvh2-stack-awsebrdsdatabase-q5yfvepscdnk.cxkg8ok0m4dj.ap-southeast-2.rds.amazonaws.com:3306/mndb"
           }
         ]
       }
