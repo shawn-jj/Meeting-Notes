@@ -12,7 +12,9 @@ This change log records the update history
 
 # Work done
 
-- Deolyed the frontend to AWS Amplify through Github repository
+- Updated @CrossOrigin URL of Controller.java at backend
+- Updated API_BASE_URL of Client.js at frontend
+- Deployed the frontend to AWS Amplify through GitHub repository
 - Run the docker image on EC2 instance
 - Created an Elastic Container Service (ECS) cluster with an EC2 instance running on it
 - Created AWS Elastic Beanstalk application to host ECS

@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/meetings")
-@CrossOrigin("http://localhost:3000/")
+// @CrossOrigin("http://localhost:3000/")
+@CrossOrigin("https://main.d1tlkz71bjbw22.amplifyapp.com/")
 public class MeetingController {
     private final MeetingService meetingService;
 

@@ -4,7 +4,7 @@
     "containerDefinitions": [
       {
         "name": "mn-backend",
-        "image": "shawnjj/mn-backend:v2",
+        "image": "shawnjj/mn-backend:v4",
         "essential": true,
         "memory": 512,
         "portMappings": [
