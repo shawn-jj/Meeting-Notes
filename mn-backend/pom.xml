@@ -11,7 +11,7 @@
 	<groupId>com.meetingNotes</groupId>
 
 	<artifactId>mn-backend</artifactId> <!-- image name -->
-	<version>v4</version> <!-- image version -->
+	<version>v1</version> <!-- image version -->
 	<organization>
 		<name>shawnjj</name> <!-- docker hub user name (also docker repo name) -->
 		<url>https://github.com/shawn-jj</url>

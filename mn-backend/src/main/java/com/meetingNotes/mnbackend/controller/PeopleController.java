@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/people")
-// @CrossOrigin("http://localhost:3000/")
-@CrossOrigin("https://main.d1tlkz71bjbw22.amplifyapp.com/")
+//@CrossOrigin("http://localhost:3000/")
+@CrossOrigin("https://main.dhshb110fulh9.amplifyapp.com/")
 public class PeopleController {
     private final PeopleService peopleService;
 

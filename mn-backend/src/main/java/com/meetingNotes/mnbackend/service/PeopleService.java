@@ -27,11 +27,7 @@ public class PeopleService {
 
     public People userLogin(LoginRequest loginRequest) {
         People verifyUser = peopleDAO.selectUserByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword())
-                                     //.orElseThrow( () -> new RuntimeException("People not found"));
-                                     .orElseThrow( () -> new RuntimeException("People with " +
-                                             "\n=========\nemail: "+ loginRequest.getEmail() +
-                                             "\npwd: " + loginRequest.getPassword() +
-                                             "\n=========\nnot found"));
+                                     .orElseThrow( () -> new RuntimeException("People not found"));
 
         return verifyUser;
     }

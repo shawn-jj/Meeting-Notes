@@ -4,7 +4,7 @@
     "containerDefinitions": [
       {
         "name": "mn-backend",
-        "image": "shawnjj/mn-backend:v4",
+        "image": "shawnjj/mn-backend:v1",
         "essential": true,
         "memory": 512,
         "portMappings": [
@@ -16,7 +16,7 @@
         "environment": [
           {
             "name": "SPRING_DATASOURCE_URL",
-            "value": "jdbc:mysql://awseb-e-sejbtimvh2-stack-awsebrdsdatabase-q5yfvepscdnk.cxkg8ok0m4dj.ap-southeast-2.rds.amazonaws.com:3306/mndb"
+            "value": "jdbc:mysql://awseb-e-nrqmcp4gsu-stack-awsebrdsdatabase-wazkezemezmv.cxkg8ok0m4dj.ap-southeast-2.rds.amazonaws.com:3306/mndb"
           }
         ]
       }
