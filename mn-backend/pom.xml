@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>com.meetingNotes</groupId>
 
-	<artifactId>mn-backend</artifactId> <!-- image name -->
-	<version>v1</version> <!-- image version -->
+	<artifactId>meetingnotes-backend</artifactId> <!-- image name -->
+	<version>new-v1</version> <!-- image version -->
 	<organization>
 		<name>shawnjj</name> <!-- docker hub user name (also docker repo name) -->
 		<url>https://github.com/shawn-jj</url>

@@ -4,7 +4,7 @@
     "containerDefinitions": [
       {
         "name": "mn-backend",
-        "image": "shawnjj/mn-backend:v1",
+        "image": "shawnjj/meetingnotes-backend:new-v1",
         "essential": true,
         "memory": 512,
         "portMappings": [

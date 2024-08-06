@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class MeetingRowMapper implements RowMapper {
 
     @Override
+    // rs: a ResultSet object maintains a cursor pointing to its current row of data
     public Meeting mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         Meeting meeting = new Meeting(
